@@ -17,8 +17,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Base Classes for Storing Genomic Link Data">
-<meta name="description" content="This package is created to manage gene-peak links">
-<meta property="og:description" content="This package is created to manage gene-peak links">
+<meta name="description" content="The goal of linkSet is to provide tools for working with gene-enhancer interactions, which is commonly seen in HiC, PC-HiC, and single-cell ATAC-seq data analysis.">
+<meta property="og:description" content="The goal of linkSet is to provide tools for working with gene-enhancer interactions, which is commonly seen in HiC, PC-HiC, and single-cell ATAC-seq data analysis.">
 <meta property="og:image" content="https://gilberthan1011.github.io/linkSet/logo.png">
 </head>
 <body>
@@ -53,8 +53,55 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-This package is created to manage gene-peak links
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="linkset-v0001">linkSet v0.0.0.1<a class="anchor" aria-label="anchor" href="#linkset-v0001"></a>
+</h1>
+</div>
+<!-- badges: start -->
+
+<!-- Interfaces for HDF5-based Single Cell File Formats -->
+<p>The goal of linkSet is to provide tools for working with gene-enhancer interactions, which is commonly seen in HiC, PC-HiC, and single-cell ATAC-seq data analysis.</p>
+<p align="center" width="100%">
+<img src="articles/img/overview.png" align="center" width="45%"></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>linkSet is not currently available on Bioconductor. You can install it from <a href="https://github.com/GilbertHan1011/linkSet" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"GilbertHan1011/linkSet"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>LinkSet can be converted from multiple data structures, like GRanges, GInteractions, and dataframes.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GilbertHan1011/linkSet" class="external-link">linkSet</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## basic example code</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/GenomicRanges" class="external-link">GenomicRanges</a></span><span class="op">)</span></span>
+<span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr1"</span>, <span class="st">"chr2"</span><span class="op">)</span>,</span>
+<span>              ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>              strand <span class="op">=</span> <span class="st">"+"</span>, symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gene1"</span>, <span class="st">"Gene2"</span>, <span class="st">"Gene3"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr2"</span><span class="op">)</span>,</span>
+<span>              ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">150</span>, <span class="fl">250</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>              strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span>
+<span><span class="co">## construct linkSet</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span>
+<span><span class="va">ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 1 metadata column:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]       Gene1 ---        chr1     50-59 |          Gene1</span></span>
+<span><span class="co">#&gt;   [2]       Gene2 ---        chr2   150-159 |          Gene2</span></span>
+<span><span class="co">#&gt;   [3]       Gene3 ---        chr2   250-259 |          Gene3</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -86,7 +133,13 @@ This package is created to manage gene-peak links
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=linkSet" class="external-link"><img src="https://img.shields.io/cran/v/linkSet" alt="CRAN/METACRAN"></a></li>
+<li><a href="https://github.com/GilbertHan1011/linkSet" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
