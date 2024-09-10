@@ -1,0 +1,9 @@
+pandoc: 3.1.11
+pkgdown: 2.1.0
+pkgdown_sha: ~
+articles:
+  linkSet: linkSet.html
+last_built: 2024-09-10T06:25Z
+urls:
+  reference: https://gilberthan1011.github.io/linkSet/reference
+  article: https://gilberthan1011.github.io/linkSet/articles
