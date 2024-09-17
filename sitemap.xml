@@ -2,6 +2,7 @@
 <url><loc>https://gilberthan1011.github.io/linkSet/404.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/LICENSE-text.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/LICENSE.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/articles/hic_workthrough.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/articles/index.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/articles/linkSet.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/authors.html</loc></url>
@@ -9,13 +10,25 @@
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/Convert.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/annotateInter-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/annotatePromoter-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/as.data.frame-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/baitGInteractions-GInteractions-GRanges-GRanges-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/countInteractions-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/crossGeneEnhancer-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/diagnoseLinkSet-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/filterLinks-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/geom_linkset-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/geom_range.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/index.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-GRange-Methods.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-accessors.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-package.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-subset-methods.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/orderLinks-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/pairdist-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/plot_genomic_ranges-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/readvalidPairs.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/reduceRegions-linkSet-method.html</loc></url>
 </urlset>
 

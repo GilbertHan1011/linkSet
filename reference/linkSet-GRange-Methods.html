@@ -17,6 +17,10 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/linkSet.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hic_workthrough.html">hic_workthrough</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/GilbertHan1011/linkSet/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -107,7 +111,10 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'linkSet'</span></span>
-<span><span class="fu">width</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">width</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for class 'linkSet'</span></span>
+<span><span class="fu">reduce</span><span class="op">(</span><span class="va">x</span>, drop.empty.ranges <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -145,7 +152,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [4]       Gene3 ---        chr4   350-359 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [5]       Gene3 ---        chr4   450-459 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 5 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 10 ranges and 0 metadata columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">narrow_bait</span> <span class="op">&lt;-</span> <span class="fu">narrowRegions</span><span class="op">(</span><span class="va">linkExample</span>, start <span class="op">=</span> <span class="fl">10</span>, width <span class="op">=</span> <span class="fl">40</span>, region <span class="op">=</span> <span class="st">"bait"</span><span class="op">)</span></span></span>
@@ -164,7 +171,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [4]       Gene3 ---        chr4   360-369 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [5]       Gene3 ---        chr4   460-469 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 5 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 10 ranges and 0 metadata columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">flank_bait</span> <span class="op">&lt;-</span> <span class="fu">flankRegions</span><span class="op">(</span><span class="va">linkExample</span>, width <span class="op">=</span> <span class="fl">100</span>, start <span class="op">=</span> <span class="cn">TRUE</span>, both <span class="op">=</span> <span class="cn">FALSE</span>, use.names <span class="op">=</span> <span class="cn">TRUE</span>, ignore.strand <span class="op">=</span> <span class="cn">FALSE</span>, region <span class="op">=</span> <span class="st">"bait"</span><span class="op">)</span></span></span>
@@ -178,7 +185,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [4]       Gene3 ---        chr4   350-359 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [5]       Gene3 ---        chr4   450-459 |          Gene3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 5 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 10 ranges and 0 metadata columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">width</span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>

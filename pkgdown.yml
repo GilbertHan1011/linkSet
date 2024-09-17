@@ -2,8 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
+  hic_workthrough: hic_workthrough.html
   linkSet: linkSet.html
-last_built: 2024-09-10T14:10Z
+last_built: 2024-09-17T16:06Z
 urls:
   reference: https://gilberthan1011.github.io/linkSet/reference
   article: https://gilberthan1011.github.io/linkSet/articles

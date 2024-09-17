@@ -17,6 +17,10 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/linkSet.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hic_workthrough.html">hic_workthrough</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/GilbertHan1011/linkSet/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -46,6 +50,9 @@
 <span><span class="co"># S4 method for class 'data.frame'</span></span>
 <span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, baitCol <span class="op">=</span> <span class="st">"gene"</span>, oeCol <span class="op">=</span> <span class="st">"peak"</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S4 method for class 'Pairs'</span></span>
+<span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, baitCol <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S4 method for class 'ANY'</span></span>
 <span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -62,6 +69,10 @@
 <dd><p>Additional arguments (not used)</p></dd>
 
 
+<dt id="arg-baitcol">baitCol<a class="anchor" aria-label="anchor" href="#arg-baitcol"></a></dt>
+<dd><p>A character string specifying the column to use for bait naming</p></dd>
+
+
 <dt id="arg-specificcol">specificCol<a class="anchor" aria-label="anchor" href="#arg-specificcol"></a></dt>
 <dd><p>A character string specifying the column to use for bait naming</p></dd>
 
@@ -69,6 +80,7 @@
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A linkSet object</p>
+<p>A linkSet object</p>
 <p>A linkSet object</p>
 <p>A linkSet object</p>
 <p>Nothing, throws an error</p>

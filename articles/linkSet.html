@@ -37,6 +37,12 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/linkSet.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/hic_workthrough.html">hic_workthrough</a></li>
+  </ul>
+</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -122,8 +128,10 @@ functions for analyzing and visualizing genomic interactions.</li>
 <p>The linkSet class can be constructed from various data types,
 including GRanges objects for both anchors, or character vectors for
 bait and GRanges for other ends.
-<img src="img/9.10_data_structure.png" alt="data structure of the linkSet class" width="70%">
-### Construction from GRanges objects</p>
+<img src="img/9.10_data_structure.png" alt="data structure of the linkSet class" width="70%"></p>
+<div class="section level3">
+<h3 id="construction-from-granges-objects">Construction from GRanges objects<a class="anchor" aria-label="anchor" href="#construction-from-granges-objects"></a>
+</h3>
 <p>To construct a <code>linkSet</code> object from GRanges objects:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GilbertHan1011/linkSet" class="external-link">linkSet</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -145,8 +153,9 @@ bait and GRanges for other ends.
 <span><span class="co">#&gt;   [2]       Gene2 ---        chr2   150-159 |          Gene2</span></span>
 <span><span class="co">#&gt;   [3]       Gene3 ---        chr2   250-259 |          Gene3</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="construction-from-ginteractions">Construction from GInteractions<a class="anchor" aria-label="anchor" href="#construction-from-ginteractions"></a>
 </h3>
@@ -159,7 +168,7 @@ function:</p>
 <span><span class="co">#&gt; Attaching package: 'InteractionSet'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:linkSet':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     anchorIds, anchors, pairdist, regions, regions&lt;-</span></span>
+<span><span class="co">#&gt;     anchorIds, anchors, pairdist, reduceRegions, regions, regions&lt;-</span></span>
 <span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/InteractionSet/man/GInteractions-class.html" class="external-link">GInteractions</a></span><span class="op">(</span></span>
 <span>  anchor1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>  anchor2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span>,</span>
@@ -180,7 +189,7 @@ function:</p>
 <span><span class="co">#&gt;   [2]        Sox9 ---        chr2   150-159 |       0.2        Sox9</span></span>
 <span><span class="co">#&gt;   [3]       Sox10 ---        chr3   250-259 |       0.3       Sox10</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 <p>Some times, you need to use gene and enhancer information to
 construct a <code>linkSet</code> object from GInteractions.</p>
@@ -212,7 +221,7 @@ construct a <code>linkSet</code> object from GInteractions.</p>
 <span><span class="co">#&gt;   [2]        Sox9</span></span>
 <span><span class="co">#&gt;   [3]       Sox10</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -248,11 +257,150 @@ frame.</p>
 <div class="section level3">
 <h3 id="getters">Getters<a class="anchor" aria-label="anchor" href="#getters"></a>
 </h3>
+<p>The important elements of the <code>linkSet</code> object can be
+easily accessed by the following accessors:</p>
+<ul>
+<li>
+<code>regions(x)</code>: Get the regions of the <code>linkSet</code>
+object.</li>
+<li>
+<code>bait(x)</code>: Get the bait of the <code>linkSet</code>
+object.</li>
+<li>
+<code>oe(x)</code>: Get the other end of the <code>linkSet</code>
+object.</li>
+<li>
+<code>regionsBait(x)</code>: Get the bait regions of the
+<code>linkSet</code> object.</li>
+<li>
+<code>regionsOe(x)</code>: Get the other end regions of the
+<code>linkSet</code> object.</li>
+<li>
+<code>mcols(x)</code>: Get the metadata of the <code>linkSet</code>
+object.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="../reference/linkSet-accessors.html">regions</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; GRanges object with 6 ranges and 0 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;</span></span>
+<span><span class="co">#&gt;   [1]     chr1      1-10      +</span></span>
+<span><span class="co">#&gt;   [2]     chr1     50-59      +</span></span>
+<span><span class="co">#&gt;   [3]     chr1   100-109      +</span></span>
+<span><span class="co">#&gt;   [4]     chr2   150-159      +</span></span>
+<span><span class="co">#&gt;   [5]     chr2   200-209      +</span></span>
+<span><span class="co">#&gt;   [6]     chr2   250-259      +</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">regionsBait</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; GRanges object with 3 ranges and 0 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;</span></span>
+<span><span class="co">#&gt;   [1]     chr1      1-10      +</span></span>
+<span><span class="co">#&gt;   [2]     chr1   100-109      +</span></span>
+<span><span class="co">#&gt;   [3]     chr2   200-209      +</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">oe</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; GRanges object with 3 ranges and 0 metadata columns:</span></span>
+<span><span class="co">#&gt;       seqnames    ranges strand</span></span>
+<span><span class="co">#&gt;          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;</span></span>
+<span><span class="co">#&gt;   [1]     chr1     50-59      +</span></span>
+<span><span class="co">#&gt;   [2]     chr2   150-159      +</span></span>
+<span><span class="co">#&gt;   [3]     chr2   250-259      +</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">bait</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Gene1" "Gene2" "Gene3"</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">mcols</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; DataFrame with 3 rows and 1 column</span></span>
+<span><span class="co">#&gt;   anchor1.symbol</span></span>
+<span><span class="co">#&gt;      &lt;character&gt;</span></span>
+<span><span class="co">#&gt; 1          Gene1</span></span>
+<span><span class="co">#&gt; 2          Gene2</span></span>
+<span><span class="co">#&gt; 3          Gene3</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="setters">Setters<a class="anchor" aria-label="anchor" href="#setters"></a>
+</h3>
+<p>Wait… You set wrong bait or oe region? You can also change it
+easily:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_bait</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gene40"</span>,<span class="st">"Gene41"</span>,<span class="st">"Gene42"</span><span class="op">)</span></span>
+<span><span class="va">new_oe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span></span>
+<span>  seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span>
+<span>  ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">105</span>, <span class="fl">205</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>,</span>
+<span>  symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Gene1"</span>, <span class="st">"Gene2"</span>, <span class="st">"Gene3"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">bait</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">new_bait</span></span>
+<span><span class="fu">oe</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">new_oe</span></span>
+<span><span class="va">ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [3]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="subsetting-and-concatenation">Subsetting and concatenation<a class="anchor" aria-label="anchor" href="#subsetting-and-concatenation"></a>
 </h2>
+<p>LinkSet object can be easily subsetted by index.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls_sub</span> <span class="op">&lt;-</span> <span class="va">ls</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">ls_sub</span></span>
+<span><span class="co">#&gt; linkSet object with 2 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>If you are interested in a specific gene or region, you can subset
+the <code>linkSet</code> object by the bait or oe region.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls_sub_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linkSet-subset-methods.html">subsetBait</a></span><span class="op">(</span><span class="va">ls</span>, <span class="st">"Gene1"</span><span class="op">)</span></span>
+<span><span class="va">ls_sub_2</span></span>
+<span><span class="co">#&gt; linkSet object with 0 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;           bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;    &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 0 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span>
+<span><span class="va">ls_sub_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linkSet-subset-methods.html">subsetBaitRegion</a></span><span class="op">(</span><span class="va">ls</span>, <span class="st">"chr1:100-200"</span><span class="op">)</span></span>
+<span><span class="va">ls_sub_3</span></span>
+<span><span class="co">#&gt; linkSet object with 1 interaction and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 2 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>You can also concatenate two <code>linkSet</code> objects.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls_concat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ls</span>, <span class="va">ls</span><span class="op">)</span></span>
+<span><span class="va">ls_concat</span></span>
+<span><span class="co">#&gt; linkSet object with 6 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [3]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   [4]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [5]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [6]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="granges-method">GRanges method<a class="anchor" aria-label="anchor" href="#granges-method"></a>
@@ -261,7 +409,7 @@ frame.</p>
 can use all the functions in GRanges to manipulate the linkSet object.
 The most wonderful things is that you can change the bait region and oe
 region separately.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span>
 <span><span class="va">linkExample</span></span>
 <span><span class="co">#&gt; linkSet object with 5 interactions and 1 metadata column:</span></span>
@@ -273,7 +421,7 @@ region separately.</p>
 <span><span class="co">#&gt;   [4]       Gene3 ---        chr4   350-359 |          Gene3</span></span>
 <span><span class="co">#&gt;   [5]       Gene3 ---        chr4   450-459 |          Gene3</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 5 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 10 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span></span>
 <span></span>
 <span><span class="co">## resize the bait region</span></span>
@@ -288,7 +436,7 @@ region separately.</p>
 <span><span class="co">#&gt;   [4]       Gene3 ---        chr4   350-359 |          Gene3</span></span>
 <span><span class="co">#&gt;   [5]       Gene3 ---        chr4   450-459 |          Gene3</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 5 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 10 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span></span>
 <span></span>
 <span><span class="co">## resize the oe region</span></span>
@@ -303,18 +451,174 @@ region separately.</p>
 <span><span class="co">#&gt;   [4]       Gene3 ---        chr4   350-424 |          Gene3</span></span>
 <span><span class="co">#&gt;   [5]       Gene3 ---        chr4   450-524 |          Gene3</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 5 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 10 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The <code>reduce</code> method allows the <code>linkSet</code>
+objects to be collapsed across the whole of the <code>linkSet</code>
+object.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reduce_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linkSet-GRange-Methods.html">reduce</a></span><span class="op">(</span><span class="va">ls_concat</span><span class="op">)</span></span>
+<span><span class="va">reduce_ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 3 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [3]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;           count</span></span>
+<span><span class="co">#&gt;       &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]         2</span></span>
+<span><span class="co">#&gt;   [2]         2</span></span>
+<span><span class="co">#&gt;   [3]         2</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>By default, we will collapse the duplicate interactions, and count
+the interactions and store in the metadata columns. You can also choose
+not to count the interactions by set
+<code>countInteractions = FALSE</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reduce_ls_2</span> <span class="op">&lt;-</span> <span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/InteractionSet/man/interaction-accessors.html" class="external-link">reduceRegions</a></span><span class="op">(</span><span class="va">ls_concat</span>, countInteractions <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">reduce_ls_2</span></span>
+<span><span class="co">#&gt; linkSet object with 6 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [3]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   [4]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [5]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [6]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="distance-calculation">Distance calculation<a class="anchor" aria-label="anchor" href="#distance-calculation"></a>
+<h2 id="diagnose">Diagnose<a class="anchor" aria-label="anchor" href="#diagnose"></a>
 </h2>
-<p>Of course, you can also calculate the distance between the bait and
-oe region.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">linkExample</span> <span class="op">=</span> <span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="../reference/pairdist-linkSet-method.html">pairdist</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></code></pre></div>
-<p>The annotated distance is shown in distance column. ##
-Annotations</p>
+<p>There are two metrics to diagnose the quality of the
+<code>linkSet</code> object: 1. The intra/inter-chromosomal
+interactions. 2. The distance between the bait and oe region.</p>
+<p>The <code>diagnose</code> function can help you to diagnose the
+<code>linkSet</code> object.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">diagnoseLinkSet</span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<pre><code><span><span class="co">#&gt; linkSet object with 5 interactions and 3 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol  inter_type</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]       Gene1 ---        chr1     50-59 |          Gene1       inter</span></span>
+<span><span class="co">#&gt;   [2]       Gene1 ---        chr2   150-159 |          Gene1       intra</span></span>
+<span><span class="co">#&gt;   [3]       Gene2 ---        chr2   250-259 |          Gene2       inter</span></span>
+<span><span class="co">#&gt;   [4]       Gene3 ---        chr4   350-359 |          Gene3       intra</span></span>
+<span><span class="co">#&gt;   [5]       Gene3 ---        chr4   450-459 |          Gene3       inter</span></span>
+<span><span class="co">#&gt;        distance</span></span>
+<span><span class="co">#&gt;       &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]        49</span></span>
+<span><span class="co">#&gt;   [2]      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   [3]        50</span></span>
+<span><span class="co">#&gt;   [4]      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   [5]        50</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 10 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls_concat</span></span>
+<span><span class="co">#&gt; linkSet object with 6 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [3]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   [4]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [5]      Gene41 ---        chr2   105-124 |          Gene2       Gene2</span></span>
+<span><span class="co">#&gt;   [6]      Gene42 ---        chr3   205-224 |          Gene3       Gene3</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>The annotated distance and interaction type is shown in the
+<code>distance</code> and <code>inter_type</code> column.</p>
+<p>You can remove the intrachromosomal interactions by:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls_concat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterLinks-linkSet-method.html">filterLinks</a></span><span class="op">(</span><span class="va">ls_concat</span>, filter_intra <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">ls_concat</span></span>
+<span><span class="co">#&gt; linkSet object with 2 interactions and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol      symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;   [2]      Gene40 ---        chr1      5-24 |          Gene1       Gene1</span></span>
+<span><span class="co">#&gt;        inter_type  distance</span></span>
+<span><span class="co">#&gt;       &lt;character&gt; &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]       inter         9</span></span>
+<span><span class="co">#&gt;   [2]       inter         9</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 2 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="annotations">Annotations<a class="anchor" aria-label="anchor" href="#annotations"></a>
+</h2>
+<p>It might be common that you only have the bait name, but don’t have
+the exact bait region. The annotation function can help you to annotate
+the bait region from a gene annotation.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bait</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span>, <span class="st">"NONEXISTENT"</span><span class="op">)</span></span>
+<span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span>
+<span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span>, <span class="fl">7000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
+<span>                strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">bait</span>, <span class="va">gr2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Test annotatePromoter</span></span>
+<span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/annotatePromoter-linkSet-method.html">annotatePromoter</a></span><span class="op">(</span><span class="va">ls</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, upstream <span class="op">=</span> <span class="fl">500</span>,overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">annotated_ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 0 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099</span></span>
+<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="statistical-analysis">Statistical analysis<a class="anchor" aria-label="anchor" href="#statistical-analysis"></a>
+</h2>
+<p>Functional enhancers usually regulate multiple genes, we can use
+cross gene analysis to identify the cross gene enhancers.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderLinks-linkSet-method.html">orderLinks</a></span><span class="op">(</span><span class="va">ls</span>,by <span class="op">=</span> <span class="st">"crossFreq"</span>,decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 1 metadata column:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | crossFreq</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; | &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099 |         1</span></span>
+<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099 |         1</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099 |         1</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h2>
+<p>With <code>plot_genomic_ranges</code> function, you can visualize the
+link between bait and oe region.</p>
+<p>You can choose the oe-centric views to visualize the functional
+enhancer which regulate multiple genes.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10): score.col not</span></span>
+<span><span class="co">#&gt; found, using count as default</span></span></code></pre></div>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p>You can adjust the range of the views.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span>,x.range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10, x.range = c(50, :</span></span>
+<span><span class="co">#&gt; score.col not found, using count as default</span></span></code></pre></div>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

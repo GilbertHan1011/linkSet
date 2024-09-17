@@ -17,6 +17,10 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/linkSet.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hic_workthrough.html">hic_workthrough</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/GilbertHan1011/linkSet/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -39,7 +43,13 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for class 'linkSet'</span></span>
-<span><span class="fu">annotatePromoter</span><span class="op">(</span><span class="va">x</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, keyType <span class="op">=</span> <span class="st">"symbol"</span>, upstream <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">annotatePromoter</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  genome <span class="op">=</span> <span class="st">"hg38"</span>,</span>
+<span>  keyType <span class="op">=</span> <span class="st">"symbol"</span>,</span>
+<span>  upstream <span class="op">=</span> <span class="fl">5000</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -61,12 +71,32 @@
 <dt id="arg-upstream">upstream<a class="anchor" aria-label="anchor" href="#arg-upstream"></a></dt>
 <dd><p>The upstream base from the gene</p></dd>
 
+
+<dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
+<dd><p>Whether to overwrite the regionsBait if it already exists</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>linkSet object</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2000</span>, <span class="fl">3000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="st">"+"</span>, symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span>, <span class="st">"NONEXISTENT"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span>, <span class="fl">7000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Test annotatePromoter</span></span></span>
+<span class="r-in"><span>  <span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu">annotatePromoter</span><span class="op">(</span><span class="va">ls</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, upstream <span class="op">=</span> <span class="fl">500</span>,overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

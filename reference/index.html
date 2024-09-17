@@ -17,6 +17,10 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/linkSet.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/hic_workthrough.html">hic_workthrough</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/GilbertHan1011/linkSet/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -61,13 +65,55 @@
         <dd>Annotate the link set with txDb. Give a gene list, and return a</dd>
       </dl><dl><dt>
 
+          <code><a href="as.data.frame-linkSet-method.html">as.data.frame(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>coerce linkSet to DataFrame</dd>
+      </dl><dl><dt>
+
           <code><a href="baitGInteractions-GInteractions-GRanges-GRanges-method.html">baitGInteractions(<i>&lt;GInteractions&gt;</i>,<i>&lt;GRanges&gt;</i>,<i>&lt;GRanges&gt;</i>)</a></code>
 
         </dt>
         <dd>Convert GInteractions with bait range and oe ranges to linkSet</dd>
       </dl><dl><dt>
 
-          <code><a href="linkSet-GRange-Methods.html">trim(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resize(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resizeRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrow(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrowRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shift(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shiftRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flank(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flankRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoters(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoterRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">width(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="countInteractions-linkSet-method.html">countInteractions(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Make Repeated Interactions Unique and Count Repetitions</dd>
+      </dl><dl><dt>
+
+          <code><a href="crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Cross gene enhancer</dd>
+      </dl><dl><dt>
+
+          <code><a href="diagnoseLinkSet-linkSet-method.html">diagnoseLinkSet(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Diagnose the linkSet object, return barplot of inter/intra interaction and distance distribution</dd>
+      </dl><dl><dt>
+
+          <code><a href="filterLinks-linkSet-method.html">filterLinks(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Filter links for further analysis</dd>
+      </dl><dl><dt>
+
+          <code><a href="geom_linkset-linkSet-method.html">geom_linkset(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Add Genome Links to Coverage Plot.</dd>
+      </dl><dl><dt>
+
+          <code><a href="geom_range.html">geom_range()</a></code>
+
+        </dt>
+        <dd>Plot genomic ranges</dd>
+      </dl><dl><dt>
+
+          <code><a href="linkSet-GRange-Methods.html">trim(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resize(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resizeRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrow(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrowRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shift(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shiftRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flank(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flankRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoters(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoterRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">width(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">reduce(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>linkSet-GRange-Methods</dd>
@@ -85,16 +131,46 @@
         <dd>LinkSet object</dd>
       </dl><dl><dt>
 
+          <code><a href="linkSet-subset-methods.html">subsetBait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-subset-methods.html">subsetBaitRegion(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-subset-methods.html">subsetOE(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Subset linkSet object based on bait names</dd>
+      </dl><dl><dt>
+
           <code><a href="linkSet.html">linkSet</a></code>
 
         </dt>
         <dd>linkSet: Base Classes for Storing Genomic Link Data</dd>
       </dl><dl><dt>
 
+          <code><a href="orderLinks-linkSet-method.html">orderLinks(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Order linkSet by mcols</dd>
+      </dl><dl><dt>
+
           <code><a href="pairdist-linkSet-method.html">pairdist(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>Calculate the distance between bait and the other end</dd>
+      </dl><dl><dt>
+
+          <code><a href="plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>plot genomic ranges and links</dd>
+      </dl><dl><dt>
+
+          <code><a href="readvalidPairs.html">readvalidPairs()</a></code>
+
+        </dt>
+        <dd>Read validPairs file to GInteractions</dd>
+      </dl><dl><dt>
+
+          <code><a href="reduceRegions-linkSet-method.html">reduceRegions(<i>&lt;linkSet&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Reduce a linkSet object</dd>
       </dl></div>
   </main></div>
 
