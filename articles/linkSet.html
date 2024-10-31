@@ -80,6 +80,13 @@ interactions between genes and enhancers, and provides functions to
 analyze and visualize the interactions.</p>
 </div>
 <div class="section level2">
+<h2 id="application-situation">Application Situation<a class="anchor" aria-label="anchor" href="#application-situation"></a>
+</h2>
+<p>linkSet can seamlessly apply to the following situation: 1. Capture
+HiC workflow. 2. Using HiC to identify gene-enhancer interactions. 3.
+Using scRNA and scATAC to predict gene-enhancer interactions.</p>
+</div>
+<div class="section level2">
 <h2 id="the-linkset-class">The linkSet class<a class="anchor" aria-label="anchor" href="#the-linkset-class"></a>
 </h2>
 <p>The linkSet class is a specialized data structure designed to
@@ -120,15 +127,13 @@ genomic analysis tools.</li>
 <li>Visualization and analysis: The class is designed to support
 functions for analyzing and visualizing genomic interactions.</li>
 </ol>
-<p><img src="img/overview.png" alt="Overview diagram of the linkSet class structure and its components" width="70%"></p>
-</div>
-<div class="section level2">
-<h2 id="construction">Construction<a class="anchor" aria-label="anchor" href="#construction"></a>
-</h2>
-<p>The linkSet class can be constructed from various data types,
-including GRanges objects for both anchors, or character vectors for
-bait and GRanges for other ends.
-<img src="img/9.10_data_structure.png" alt="data structure of the linkSet class" width="70%"></p>
+<p><img src="img%2Foverview.png" alt="Overview diagram of the linkSet class structure and its components" width="70%"></p>
+<p><img src="img%2Flinksetmethod.png" alt="Overview diagram of the linkSet class structure and its components" width="70%">
+## Construction The linkSet class can be constructed from various data
+types, including GRanges objects for both anchors, or character vectors
+for bait and GRanges for other ends.
+<img src="img%2F9.10_data_structure.png" alt="data structure of the linkSet class" width="70%"></p>
+<p><img src="img%2FlinkSetImport.png" alt="Import methods" width="70%"></p>
 <div class="section level3">
 <h3 id="construction-from-granges-objects">Construction from GRanges objects<a class="anchor" aria-label="anchor" href="#construction-from-granges-objects"></a>
 </h3>
@@ -164,6 +169,42 @@ bait and GRanges for other ends.
 function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">InteractionSet</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: SummarizedExperiment</span></span>
+<span><span class="co">#&gt; Loading required package: MatrixGenerics</span></span>
+<span><span class="co">#&gt; Loading required package: matrixStats</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'MatrixGenerics'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,</span></span>
+<span><span class="co">#&gt;     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,</span></span>
+<span><span class="co">#&gt;     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,</span></span>
+<span><span class="co">#&gt;     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,</span></span>
+<span><span class="co">#&gt;     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,</span></span>
+<span><span class="co">#&gt;     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,</span></span>
+<span><span class="co">#&gt;     colWeightedMeans, colWeightedMedians, colWeightedSds,</span></span>
+<span><span class="co">#&gt;     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,</span></span>
+<span><span class="co">#&gt;     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,</span></span>
+<span><span class="co">#&gt;     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span></span>
+<span><span class="co">#&gt;     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span></span>
+<span><span class="co">#&gt;     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span></span>
+<span><span class="co">#&gt;     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span></span>
+<span><span class="co">#&gt;     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span></span>
+<span><span class="co">#&gt;     rowWeightedSds, rowWeightedVars</span></span>
+<span><span class="co">#&gt; Loading required package: Biobase</span></span>
+<span><span class="co">#&gt; Welcome to Bioconductor</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Vignettes contain introductory material; view with</span></span>
+<span><span class="co">#&gt;     'browseVignettes()'. To cite Bioconductor, see</span></span>
+<span><span class="co">#&gt;     'citation("Biobase")', and for packages 'citation("pkgname")'.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'Biobase'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:MatrixGenerics':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     rowMedians</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     anyMissing, rowMedians</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'InteractionSet'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:linkSet':</span></span>
@@ -504,7 +545,7 @@ interactions. 2. The distance between the bait and oe region.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">diagnoseLinkSet</span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
-<p><img src="linkSet_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; linkSet object with 5 interactions and 3 metadata columns:</span></span>
 <span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol  inter_type</span></span>
 <span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span></span>
@@ -612,13 +653,13 @@ enhancer which regulate multiple genes.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10): score.col not</span></span>
 <span><span class="co">#&gt; found, using count as default</span></span></code></pre></div>
-<p><img src="linkSet_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 <p>You can adjust the range of the views.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span>,x.range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10, x.range = c(50, :</span></span>
 <span><span class="co">#&gt; score.col not found, using count as default</span></span></code></pre></div>
-<p><img src="linkSet_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -631,7 +672,7 @@ enhancer which regulate multiple genes.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
