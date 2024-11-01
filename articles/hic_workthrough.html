@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,11 +104,12 @@ object</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hic_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"toyValidatePair"</span>, </span>
 <span>                        package<span class="op">=</span><span class="st">"linkSet"</span><span class="op">)</span></span>
-<span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readvalidPairs.html">readvalidPairs</a></span><span class="op">(</span><span class="va">hic_file</span><span class="op">)</span></span>
-<span><span class="va">src</span> <span class="op">&lt;-</span> <span class="fu">Organism.dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Organism.dplyr/man/src.html" class="external-link">src_organism</a></span><span class="op">(</span><span class="st">"TxDb.Mmusculus.UCSC.mm10.knownGene"</span><span class="op">)</span></span>
+<span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Convert.html">readvalidPairs</a></span><span class="op">(</span><span class="va">hic_file</span><span class="op">)</span></span>
+<span><span class="va">promoterGr</span> <span class="op">&lt;-</span> <span class="fu">withTxDb</span><span class="op">(</span><span class="st">"mm10"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">src</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu">Organism.dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="va">src</span>, columns <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span>
+<span>  <span class="fu">IRanges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/intra-range-methods.html" class="external-link">promoters</a></span><span class="op">(</span><span class="va">genes</span>, upstream <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; creating 'src_organism' database...</span></span>
-<span><span class="va">geneGr</span> <span class="op">&lt;-</span> <span class="fu">Organism.dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="va">src</span>,columns <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span>
-<span><span class="va">promoterGr</span> <span class="op">&lt;-</span> <span class="fu">IRanges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/intra-range-methods.html" class="external-link">promoters</a></span><span class="op">(</span><span class="va">geneGr</span>,upstream <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in valid.GenomicRanges.seqinfo(x, suggest.trim = TRUE): GRanges object contains 3 out-of-bound ranges located on sequences</span></span>
 <span><span class="co">#&gt;   chr4_JH584294_random, chr4_JH584292_random, and chr5_GL456354_random.</span></span>
 <span><span class="co">#&gt;   Note that ranges located on a sequence whose length is unknown (NA) or</span></span>
@@ -126,37 +127,37 @@ region to upstream 5kb and downstream 5kb. After that, we use
 object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/linkSet-GRange-Methods.html">resize</a></span><span class="op">(</span><span class="va">gi</span>,<span class="fl">10000</span>,fix <span class="op">=</span> <span class="st">"center"</span><span class="op">)</span></span>
-<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">baitGInteractions</span><span class="op">(</span><span class="va">gi</span>,geneGr <span class="op">=</span> <span class="va">geneGr</span>,peakGr <span class="op">=</span> <span class="va">enhancer</span>,<span class="st">"symbol"</span><span class="op">)</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">baitGInteractions</span><span class="op">(</span><span class="va">gi</span>,geneGr <span class="op">=</span> <span class="va">promoterGr</span>,peakGr <span class="op">=</span> <span class="va">enhancer</span>,<span class="st">"symbol"</span><span class="op">)</span></span>
 <span><span class="va">ls</span></span>
-<span><span class="co">#&gt; linkSet object with 579 interactions and 2 metadata columns:</span></span>
-<span><span class="co">#&gt;                bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
-<span><span class="co">#&gt;         &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
-<span><span class="co">#&gt;     [1]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [2]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [3]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [4]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [5]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     ...         ... ...         ...               ... .            ...</span></span>
-<span><span class="co">#&gt;   [575]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [576]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [577]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [578]     Slco5a1 ---        chr1 78187171-78187630 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [579]     Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
-<span><span class="co">#&gt;             anchor2.name</span></span>
-<span><span class="co">#&gt;              &lt;character&gt;</span></span>
-<span><span class="co">#&gt;     [1] 12.2266622787328</span></span>
-<span><span class="co">#&gt;     [2] 12.2266622787328</span></span>
-<span><span class="co">#&gt;     [3] 12.2266622787328</span></span>
-<span><span class="co">#&gt;     [4] 12.2266622787328</span></span>
-<span><span class="co">#&gt;     [5] 12.2266622787328</span></span>
-<span><span class="co">#&gt;     ...              ...</span></span>
-<span><span class="co">#&gt;   [575] 16.1891332694206</span></span>
-<span><span class="co">#&gt;   [576] 16.1891332694206</span></span>
-<span><span class="co">#&gt;   [577] 16.1891332694206</span></span>
-<span><span class="co">#&gt;   [578]  11.771392591681</span></span>
-<span><span class="co">#&gt;   [579] 14.6843556168742</span></span>
+<span><span class="co">#&gt; linkSet object with 40 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;                 bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;          &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]         Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
+<span><span class="co">#&gt;    [2]        Prdm14 ---        chr1 12785091-12785750 |         Prdm14</span></span>
+<span><span class="co">#&gt;    [3]          Bag2 ---        chr1 12785091-12785750 |           Bag2</span></span>
+<span><span class="co">#&gt;    [4] 4930444P10Rik ---        chr1 12785091-12785750 |  4930444P10Rik</span></span>
+<span><span class="co">#&gt;    [5]         Rdh10 ---        chr1 12785091-12785750 |          Rdh10</span></span>
+<span><span class="co">#&gt;    ...           ... ...         ...               ... .            ...</span></span>
+<span><span class="co">#&gt;   [36]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [37]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [38]       Slco5a1 ---        chr1 75286081-75286280 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [39]       Slco5a1 ---        chr1 72687651-72687800 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [40]       Slco5a1 ---        chr1 64040331-64041080 |        Slco5a1</span></span>
+<span><span class="co">#&gt;            anchor2.name</span></span>
+<span><span class="co">#&gt;             &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1] 12.2266622787328</span></span>
+<span><span class="co">#&gt;    [2] 12.2266622787328</span></span>
+<span><span class="co">#&gt;    [3] 12.2266622787328</span></span>
+<span><span class="co">#&gt;    [4] 12.2266622787328</span></span>
+<span><span class="co">#&gt;    [5] 12.2266622787328</span></span>
+<span><span class="co">#&gt;    ...              ...</span></span>
+<span><span class="co">#&gt;   [36] 16.1891332694206</span></span>
+<span><span class="co">#&gt;   [37] 16.1891332694206</span></span>
+<span><span class="co">#&gt;   [38] 12.1079981422902</span></span>
+<span><span class="co">#&gt;   [39] 14.5003484893464</span></span>
+<span><span class="co">#&gt;   [40] 11.4785793668123</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 109 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 36 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 66 sequences (1 circular) from mm10 genome</span></span></code></pre></div>
 <p>When we print the <code>linkSet</code> object, we can see the basic
 information of the <code>linkSet</code> object. By default, we don’t
@@ -164,31 +165,31 @@ show the bait region. But you are interested in the bait region, you can
 set <code>showBaitRegion = TRUE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">showLinkSet</span><span class="op">(</span><span class="va">ls</span>, baitRegion <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; linkSet object with 579 interactions and 2 metadata columns:</span></span>
-<span><span class="co">#&gt;          bait seqnames_bait       ranges_bait     seqnames_oe         ranges_oe</span></span>
-<span><span class="co">#&gt;   [1]   Sulf1          chr1 12692277-12861192 ---        chr1 12785091-12785750</span></span>
-<span><span class="co">#&gt;   [2]   Sulf1          chr1 12692277-12861192 ---        chr1 12785091-12785750</span></span>
-<span><span class="co">#&gt;   [3]   Sulf1          chr1 12692277-12861192 ---        chr1 12785091-12785750</span></span>
-<span><span class="co">#&gt;   [4]   Sulf1          chr1 12692277-12861192 ---        chr1 12785091-12785750</span></span>
-<span><span class="co">#&gt;   [5]   Sulf1          chr1 12692277-12861192 ---        chr1 12785091-12785750</span></span>
-<span><span class="co">#&gt;   ...     ...           ...               ... ...         ...               ...</span></span>
-<span><span class="co">#&gt; [575] Slco5a1          chr1 12866549-12992650 ---        chr1 14496641-14497000</span></span>
-<span><span class="co">#&gt; [576] Slco5a1          chr1 12866549-12992650 ---        chr1 14496641-14497000</span></span>
-<span><span class="co">#&gt; [577] Slco5a1          chr1 12866549-12992650 ---        chr1 14496641-14497000</span></span>
-<span><span class="co">#&gt; [578] Slco5a1          chr1 12866549-12992650 ---        chr1 78187171-78187630</span></span>
-<span><span class="co">#&gt; [579] Slco5a1          chr1 12866549-12992650 ---        chr1 39924881-39925280</span></span>
-<span><span class="co">#&gt;       | anchor1.symbol     anchor2.name</span></span>
-<span><span class="co">#&gt;   [1] |          Sulf1 12.2266622787328</span></span>
-<span><span class="co">#&gt;   [2] |          Sulf1 12.2266622787328</span></span>
-<span><span class="co">#&gt;   [3] |          Sulf1 12.2266622787328</span></span>
-<span><span class="co">#&gt;   [4] |          Sulf1 12.2266622787328</span></span>
-<span><span class="co">#&gt;   [5] |          Sulf1 12.2266622787328</span></span>
-<span><span class="co">#&gt;   ... .            ...              ...</span></span>
-<span><span class="co">#&gt; [575] |        Slco5a1 16.1891332694206</span></span>
-<span><span class="co">#&gt; [576] |        Slco5a1 16.1891332694206</span></span>
-<span><span class="co">#&gt; [577] |        Slco5a1 16.1891332694206</span></span>
-<span><span class="co">#&gt; [578] |        Slco5a1  11.771392591681</span></span>
-<span><span class="co">#&gt; [579] |        Slco5a1 14.6843556168742</span></span></code></pre></div>
+<span><span class="co">#&gt; linkSet object with 40 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;               bait seqnames_bait       ranges_bait     seqnames_oe</span></span>
+<span><span class="co">#&gt;  [1]         Sulf1          chr1 12682277-12692476 ---        chr1</span></span>
+<span><span class="co">#&gt;  [2]        Prdm14          chr1 13126964-13137163 ---        chr1</span></span>
+<span><span class="co">#&gt;  [3]          Bag2          chr1 33757596-33767795 ---        chr1</span></span>
+<span><span class="co">#&gt;  [4] 4930444P10Rik          chr1 16093126-16103325 ---        chr1</span></span>
+<span><span class="co">#&gt;  [5]         Rdh10          chr1 16095774-16105973 ---        chr1</span></span>
+<span><span class="co">#&gt;  ...           ...           ...               ... ...         ...</span></span>
+<span><span class="co">#&gt; [36]       Slco5a1          chr1 12992451-13002650 ---        chr1</span></span>
+<span><span class="co">#&gt; [37]       Slco5a1          chr1 12992451-13002650 ---        chr1</span></span>
+<span><span class="co">#&gt; [38]       Slco5a1          chr1 12992451-13002650 ---        chr1</span></span>
+<span><span class="co">#&gt; [39]       Slco5a1          chr1 12992451-13002650 ---        chr1</span></span>
+<span><span class="co">#&gt; [40]       Slco5a1          chr1 12992451-13002650 ---        chr1</span></span>
+<span><span class="co">#&gt;              ranges_oe | anchor1.symbol     anchor2.name</span></span>
+<span><span class="co">#&gt;  [1] 12785091-12785750 |          Sulf1 12.2266622787328</span></span>
+<span><span class="co">#&gt;  [2] 12785091-12785750 |         Prdm14 12.2266622787328</span></span>
+<span><span class="co">#&gt;  [3] 12785091-12785750 |           Bag2 12.2266622787328</span></span>
+<span><span class="co">#&gt;  [4] 12785091-12785750 |  4930444P10Rik 12.2266622787328</span></span>
+<span><span class="co">#&gt;  [5] 12785091-12785750 |          Rdh10 12.2266622787328</span></span>
+<span><span class="co">#&gt;  ...               ... .            ...              ...</span></span>
+<span><span class="co">#&gt; [36] 14496641-14497000 |        Slco5a1 16.1891332694206</span></span>
+<span><span class="co">#&gt; [37] 14496641-14497000 |        Slco5a1 16.1891332694206</span></span>
+<span><span class="co">#&gt; [38] 75286081-75286280 |        Slco5a1 12.1079981422902</span></span>
+<span><span class="co">#&gt; [39] 72687651-72687800 |        Slco5a1 14.5003484893464</span></span>
+<span><span class="co">#&gt; [40] 64040331-64041080 |        Slco5a1 11.4785793668123</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="diagnose-and-filter-links">Diagnose and filter links<a class="anchor" aria-label="anchor" href="#diagnose-and-filter-links"></a>
@@ -196,77 +197,80 @@ set <code>showBaitRegion = TRUE</code>.</p>
 <p>Now, we can run diagnoseLinkSet to check the distance distribution
 and inter/intra interaction percentage.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">diagnoseLinkSet</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnoseLinkSet-linkSet-method.html">diagnoseLinkSet</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
 <p><img src="hic_workthrough_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; linkSet object with 579 interactions and 4 metadata columns:</span></span>
-<span><span class="co">#&gt;                bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
-<span><span class="co">#&gt;         &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
-<span><span class="co">#&gt;     [1]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [2]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [3]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [4]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     [5]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;     ...         ... ...         ...               ... .            ...</span></span>
-<span><span class="co">#&gt;   [575]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [576]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [577]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [578]     Slco5a1 ---        chr1 78187171-78187630 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [579]     Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
-<span><span class="co">#&gt;             anchor2.name  inter_type  distance</span></span>
-<span><span class="co">#&gt;              &lt;character&gt; &lt;character&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;     [1] 12.2266622787328       inter      8686</span></span>
-<span><span class="co">#&gt;     [2] 12.2266622787328       inter      8686</span></span>
-<span><span class="co">#&gt;     [3] 12.2266622787328       inter      8686</span></span>
-<span><span class="co">#&gt;     [4] 12.2266622787328       inter      8686</span></span>
-<span><span class="co">#&gt;     [5] 12.2266622787328       inter      8686</span></span>
-<span><span class="co">#&gt;     ...              ...         ...       ...</span></span>
-<span><span class="co">#&gt;   [575] 16.1891332694206       inter   1567221</span></span>
-<span><span class="co">#&gt;   [576] 16.1891332694206       inter   1567221</span></span>
-<span><span class="co">#&gt;   [577] 16.1891332694206       inter   1567221</span></span>
-<span><span class="co">#&gt;   [578]  11.771392591681       inter  65257801</span></span>
-<span><span class="co">#&gt;   [579] 14.6843556168742       inter  26995481</span></span>
+<pre><code><span><span class="co">#&gt; linkSet object with 40 interactions and 4 metadata columns:</span></span>
+<span><span class="co">#&gt;                 bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;          &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]         Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
+<span><span class="co">#&gt;    [2]        Prdm14 ---        chr1 12785091-12785750 |         Prdm14</span></span>
+<span><span class="co">#&gt;    [3]          Bag2 ---        chr1 12785091-12785750 |           Bag2</span></span>
+<span><span class="co">#&gt;    [4] 4930444P10Rik ---        chr1 12785091-12785750 |  4930444P10Rik</span></span>
+<span><span class="co">#&gt;    [5]         Rdh10 ---        chr1 12785091-12785750 |          Rdh10</span></span>
+<span><span class="co">#&gt;    ...           ... ...         ...               ... .            ...</span></span>
+<span><span class="co">#&gt;   [36]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [37]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [38]       Slco5a1 ---        chr1 75286081-75286280 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [39]       Slco5a1 ---        chr1 72687651-72687800 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [40]       Slco5a1 ---        chr1 64040331-64041080 |        Slco5a1</span></span>
+<span><span class="co">#&gt;            anchor2.name  inter_type  distance</span></span>
+<span><span class="co">#&gt;             &lt;character&gt; &lt;character&gt; &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;    [1] 12.2266622787328       inter     98044</span></span>
+<span><span class="co">#&gt;    [2] 12.2266622787328       inter    346643</span></span>
+<span><span class="co">#&gt;    [3] 12.2266622787328       inter  20977275</span></span>
+<span><span class="co">#&gt;    [4] 12.2266622787328       inter   3312805</span></span>
+<span><span class="co">#&gt;    [5] 12.2266622787328       inter   3315453</span></span>
+<span><span class="co">#&gt;    ...              ...         ...       ...</span></span>
+<span><span class="co">#&gt;   [36] 16.1891332694206       inter   1499270</span></span>
+<span><span class="co">#&gt;   [37] 16.1891332694206       inter   1499270</span></span>
+<span><span class="co">#&gt;   [38] 12.1079981422902       inter  62288630</span></span>
+<span><span class="co">#&gt;   [39] 14.5003484893464       inter  59690175</span></span>
+<span><span class="co">#&gt;   [40] 11.4785793668123       inter  51043155</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 109 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 36 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 66 sequences (1 circular) from mm10 genome</span></span></code></pre>
 <p>Intrachromosomal interaction and long distance interaction are likely
 be noise, so we filter them.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterLinks-linkSet-method.html">filterLinks</a></span><span class="op">(</span><span class="va">ls</span>,filter_intra <span class="op">=</span> <span class="cn">TRUE</span>, filter_unannotate <span class="op">=</span> <span class="cn">TRUE</span>, distance <span class="op">=</span> <span class="fl">50000000</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">countInteractibility</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in countInteractibility(ls): No intra-chromosomal interactions found.</span></span>
+<span><span class="co">#&gt; Please run this function before you filterLinks.</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filterLinks-linkSet-method.html">filterLinks</a></span><span class="op">(</span><span class="va">ls</span>,filter_intra <span class="op">=</span> <span class="cn">TRUE</span>, filter_unannotate <span class="op">=</span> <span class="cn">TRUE</span>, distance <span class="op">=</span> <span class="fl">50000000</span><span class="op">)</span></span></code></pre></div>
 <p>Duplicated links are associated with contact frequency, so it’s a
 good idea to count duplicated links.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">countInteractions</span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/orderLinks-linkSet-method.html">orderLinks</a></span><span class="op">(</span><span class="va">ls</span>,by <span class="op">=</span> <span class="st">"count"</span>,decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="co">#&gt; linkSet object with 50 interactions and 5 metadata columns:</span></span>
-<span><span class="co">#&gt;               bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
-<span><span class="co">#&gt;        &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
-<span><span class="co">#&gt;    [1]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;    [2]     Slco5a1 ---        chr1 12785091-12785750 |        Slco5a1</span></span>
-<span><span class="co">#&gt;    [3]     Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
-<span><span class="co">#&gt;    [4]       Ncoa2 ---        chr1 12785091-12785750 |          Ncoa2</span></span>
-<span><span class="co">#&gt;    [5]       Sulf1 ---        chr1 14496641-14497000 |          Sulf1</span></span>
-<span><span class="co">#&gt;    ...         ... ...         ...               ... .            ...</span></span>
-<span><span class="co">#&gt;   [46]     Slco5a1 ---        chr1 35926611-35926860 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [47]     Slco5a1 ---        chr1 38683021-38683930 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [48]     Slco5a1 ---        chr1 34163531-34164100 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [49]     Slco5a1 ---        chr1 62841301-62841760 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [50]     Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
-<span><span class="co">#&gt;            anchor2.name  inter_type  distance     count</span></span>
+<span><span class="co">#&gt; linkSet object with 23 interactions and 5 metadata columns:</span></span>
+<span><span class="co">#&gt;                 bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;          &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]         Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
+<span><span class="co">#&gt;    [2]        Prdm14 ---        chr1 12785091-12785750 |         Prdm14</span></span>
+<span><span class="co">#&gt;    [3]          Bag2 ---        chr1 12785091-12785750 |           Bag2</span></span>
+<span><span class="co">#&gt;    [4] 4930444P10Rik ---        chr1 12785091-12785750 |  4930444P10Rik</span></span>
+<span><span class="co">#&gt;    [5]         Rdh10 ---        chr1 12785091-12785750 |          Rdh10</span></span>
+<span><span class="co">#&gt;    ...           ... ...         ...               ... .            ...</span></span>
+<span><span class="co">#&gt;   [19]         Kcnb2 ---        chr1 12785091-12785750 |          Kcnb2</span></span>
+<span><span class="co">#&gt;   [20]          Clk1 ---        chr1 12785091-12785750 |           Clk1</span></span>
+<span><span class="co">#&gt;   [21]        Nif3l1 ---        chr1 12785091-12785750 |         Nif3l1</span></span>
+<span><span class="co">#&gt;   [22]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [23]       Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
+<span><span class="co">#&gt;            anchor2.name  inter_type     count  distance</span></span>
 <span><span class="co">#&gt;             &lt;character&gt; &lt;character&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;    [1] 12.2266622787328       inter      8686       404</span></span>
-<span><span class="co">#&gt;    [2] 12.2266622787328       inter    144179        20</span></span>
-<span><span class="co">#&gt;    [3] 16.1891332694206       inter   1567221        10</span></span>
-<span><span class="co">#&gt;    [4] 12.2266622787328       inter    471173         8</span></span>
-<span><span class="co">#&gt;    [5] 16.1891332694206       inter   1720086         5</span></span>
+<span><span class="co">#&gt;    [1] 12.2266622787328       inter         1     98044</span></span>
+<span><span class="co">#&gt;    [2] 12.2266622787328       inter         1    346643</span></span>
+<span><span class="co">#&gt;    [3] 12.2266622787328       inter         1  20977275</span></span>
+<span><span class="co">#&gt;    [4] 12.2266622787328       inter         1   3312805</span></span>
+<span><span class="co">#&gt;    [5] 12.2266622787328       inter         1   3315453</span></span>
 <span><span class="co">#&gt;    ...              ...         ...       ...       ...</span></span>
-<span><span class="co">#&gt;   [46] 14.3114832520841       inter  22997136         1</span></span>
-<span><span class="co">#&gt;   [47] 10.9529360911238       inter  25753876         1</span></span>
-<span><span class="co">#&gt;   [48] 11.2903880454209       inter  21234216         1</span></span>
-<span><span class="co">#&gt;   [49] 11.6972535378061       inter  49911931         1</span></span>
-<span><span class="co">#&gt;   [50] 14.6843556168742       inter  26995481         1</span></span>
+<span><span class="co">#&gt;   [19] 12.2266622787328       inter         1   2496933</span></span>
+<span><span class="co">#&gt;   [20] 12.2266622787328       inter         1  45643546</span></span>
+<span><span class="co">#&gt;   [21] 12.2266622787328       inter         1  45654830</span></span>
+<span><span class="co">#&gt;   [22] 16.1891332694206       inter         1   1499270</span></span>
+<span><span class="co">#&gt;   [23] 14.6843556168742       inter         1  26927530</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 48 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 24 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 66 sequences (1 circular) from mm10 genome</span></span></code></pre></div>
 <p>We can notice that there is a significant link strength between
 <code>Sulf1</code> and <code>chr1:12785091-12785750</code>.</p>
@@ -280,35 +284,35 @@ meaningful.</p>
 <code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
 <span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderLinks-linkSet-method.html">orderLinks</a></span><span class="op">(</span><span class="va">ls</span>,by <span class="op">=</span> <span class="st">"crossFreq"</span>,decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">ls</span></span>
-<span><span class="co">#&gt; linkSet object with 50 interactions and 6 metadata columns:</span></span>
-<span><span class="co">#&gt;               bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
-<span><span class="co">#&gt;        &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
-<span><span class="co">#&gt;    [1]       Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
-<span><span class="co">#&gt;    [2]     Slco5a1 ---        chr1 12785091-12785750 |        Slco5a1</span></span>
-<span><span class="co">#&gt;    [3]        Xkr9 ---        chr1 12785091-12785750 |           Xkr9</span></span>
-<span><span class="co">#&gt;    [4]      Ogfrl1 ---        chr1 12785091-12785750 |         Ogfrl1</span></span>
-<span><span class="co">#&gt;    [5]      Adgrb3 ---        chr1 12785091-12785750 |         Adgrb3</span></span>
-<span><span class="co">#&gt;    ...         ... ...         ...               ... .            ...</span></span>
-<span><span class="co">#&gt;   [46]     Slco5a1 ---        chr1 39758181-39758690 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [47]     Slco5a1 ---        chr1 38683021-38683930 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [48]     Slco5a1 ---        chr1 34163531-34164100 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [49]     Slco5a1 ---        chr1 62841301-62841760 |        Slco5a1</span></span>
-<span><span class="co">#&gt;   [50]     Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
-<span><span class="co">#&gt;            anchor2.name  inter_type  distance     count crossFreq</span></span>
+<span><span class="co">#&gt; linkSet object with 23 interactions and 6 metadata columns:</span></span>
+<span><span class="co">#&gt;                 bait     seqnames_oe         ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;          &lt;character&gt;           &lt;Rle&gt;         &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;    [1]         Sulf1 ---        chr1 12785091-12785750 |          Sulf1</span></span>
+<span><span class="co">#&gt;    [2]        Prdm14 ---        chr1 12785091-12785750 |         Prdm14</span></span>
+<span><span class="co">#&gt;    [3]          Bag2 ---        chr1 12785091-12785750 |           Bag2</span></span>
+<span><span class="co">#&gt;    [4] 4930444P10Rik ---        chr1 12785091-12785750 |  4930444P10Rik</span></span>
+<span><span class="co">#&gt;    [5]         Rdh10 ---        chr1 12785091-12785750 |          Rdh10</span></span>
+<span><span class="co">#&gt;    ...           ... ...         ...               ... .            ...</span></span>
+<span><span class="co">#&gt;   [19]         Kcnb2 ---        chr1 12785091-12785750 |          Kcnb2</span></span>
+<span><span class="co">#&gt;   [20]          Clk1 ---        chr1 12785091-12785750 |           Clk1</span></span>
+<span><span class="co">#&gt;   [21]        Nif3l1 ---        chr1 12785091-12785750 |         Nif3l1</span></span>
+<span><span class="co">#&gt;   [22]       Slco5a1 ---        chr1 14496641-14497000 |        Slco5a1</span></span>
+<span><span class="co">#&gt;   [23]       Slco5a1 ---        chr1 39924881-39925280 |        Slco5a1</span></span>
+<span><span class="co">#&gt;            anchor2.name  inter_type     count  distance crossFreq</span></span>
 <span><span class="co">#&gt;             &lt;character&gt; &lt;character&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;    [1] 12.2266622787328       inter      8686       404        37</span></span>
-<span><span class="co">#&gt;    [2] 12.2266622787328       inter    144179        20        37</span></span>
-<span><span class="co">#&gt;    [3] 12.2266622787328       inter    899826         2        37</span></span>
-<span><span class="co">#&gt;    [4] 12.2266622787328       inter  10596562         1        37</span></span>
-<span><span class="co">#&gt;    [5] 12.2266622787328       inter  12663171         5        37</span></span>
+<span><span class="co">#&gt;    [1] 12.2266622787328       inter         1     98044        21</span></span>
+<span><span class="co">#&gt;    [2] 12.2266622787328       inter         1    346643        21</span></span>
+<span><span class="co">#&gt;    [3] 12.2266622787328       inter         1  20977275        21</span></span>
+<span><span class="co">#&gt;    [4] 12.2266622787328       inter         1   3312805        21</span></span>
+<span><span class="co">#&gt;    [5] 12.2266622787328       inter         1   3315453        21</span></span>
 <span><span class="co">#&gt;    ...              ...         ...       ...       ...       ...</span></span>
-<span><span class="co">#&gt;   [46]  11.037989817782       inter  26828836         1         1</span></span>
-<span><span class="co">#&gt;   [47] 10.9529360911238       inter  25753876         1         1</span></span>
-<span><span class="co">#&gt;   [48] 11.2903880454209       inter  21234216         1         1</span></span>
-<span><span class="co">#&gt;   [49] 11.6972535378061       inter  49911931         1         1</span></span>
-<span><span class="co">#&gt;   [50] 14.6843556168742       inter  26995481         1         1</span></span>
+<span><span class="co">#&gt;   [19] 12.2266622787328       inter         1   2496933        21</span></span>
+<span><span class="co">#&gt;   [20] 12.2266622787328       inter         1  45643546        21</span></span>
+<span><span class="co">#&gt;   [21] 12.2266622787328       inter         1  45654830        21</span></span>
+<span><span class="co">#&gt;   [22] 16.1891332694206       inter         1   1499270         1</span></span>
+<span><span class="co">#&gt;   [23] 14.6843556168742       inter         1  26927530         1</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 48 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 24 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 66 sequences (1 circular) from mm10 genome</span></span></code></pre></div>
 <p>We can use <code>plot_genomic_ranges</code> to visualize the cross
 gene links.</p>

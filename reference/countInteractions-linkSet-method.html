@@ -11,7 +11,7 @@ counts the number of repetitions for each unique interaction."><meta property="o
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,12 +73,21 @@ counts the number of repetitions for each unique interaction.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">linkSet</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">linkSet</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">linkSet</span>,<span class="va">linkSet</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">linkSet</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">linkExample</span>,<span class="va">linkExample</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">countInteractions</span><span class="op">(</span><span class="va">linkSet</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> unable to find an inherited method for function ‘countInteractions’ for signature ‘x = "character"’</span>
 <span class="r-in"><span><span class="va">result</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 5 interactions and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              bait     seqnames_oe ranges_oe | anchor1.symbol     count</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;integer&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]       Gene1 ---        chr1     50-59 |          Gene1         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]       Gene1 ---        chr2   150-159 |          Gene1         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]       Gene2 ---        chr2   250-259 |          Gene2         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]       Gene3 ---        chr4   350-359 |          Gene3         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]       Gene3 ---        chr4   450-459 |          Gene3         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 10 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

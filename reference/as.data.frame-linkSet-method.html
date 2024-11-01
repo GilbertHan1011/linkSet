@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,21 @@
     <p>A DataFrame object</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a linkSet object</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Convert linkSet to DataFrame</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    bait    bait_region      oe_region anchor1.symbol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Gene1    chr1:1-10:+   chr1:50-59:+          Gene1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Gene1 chr1:100-109:+ chr2:150-159:+          Gene1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Gene2 chr2:200-209:+ chr2:250-259:+          Gene2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Gene3 chr3:300-309:+ chr4:350-359:+          Gene3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Gene3 chr4:400-409:+ chr4:450-459:+          Gene3</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

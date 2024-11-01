@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,9 @@
 <span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, baitCol <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'ANY'</span></span>
-<span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">readvalidPairs</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,6 +75,10 @@
 <dd><p>A character string specifying the column to use for bait naming</p></dd>
 
 
+<dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
+<dd><p>A character string specifying the path to the validPairs file</p></dd>
+
+
 <dt id="arg-specificcol">specificCol<a class="anchor" aria-label="anchor" href="#arg-specificcol"></a></dt>
 <dd><p>A character string specifying the column to use for bait naming</p></dd>
 
@@ -84,8 +90,101 @@
 <p>A linkSet object</p>
 <p>A linkSet object</p>
 <p>Nothing, throws an error</p>
+<p>A GInteractions object</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">InteractionSet</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: SummarizedExperiment</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: MatrixGenerics</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: matrixStats</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘MatrixGenerics’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:matrixStats’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colWeightedMeans, colWeightedMedians, colWeightedSds,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowWeightedSds, rowWeightedVars</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: Biobase</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Welcome to Bioconductor</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Vignettes contain introductory material; view with</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     'browseVignettes()'. To cite Bioconductor, see</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     'citation("Biobase")', and for packages 'citation("pkgname")'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘Biobase’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:MatrixGenerics’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     rowMedians</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:matrixStats’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     anyMissing, rowMedians</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘InteractionSet’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:linkSet’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     anchorIds, anchors, pairdist, reduceRegions, regions, regions&lt;-</span>
+<span class="r-in"><span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/InteractionSet/man/GInteractions-class.html" class="external-link">GInteractions</a></span><span class="op">(</span>anchor1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, anchor2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">300</span>, <span class="fl">400</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">Convert</span><span class="op">(</span><span class="va">gi</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ls</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 2 interactions and 0 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               bait     seqnames_oe ranges_oe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] chr1:100-149 ---        chr2   300-349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2] chr1:200-249 ---        chr2   400-449</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 4 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene1"</span>, <span class="st">"gene2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  peak <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1:1000-2000"</span>, <span class="st">"chr2:1500-2500"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.5</span>, <span class="fl">6.0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">Convert</span><span class="op">(</span><span class="va">df</span>, source <span class="op">=</span> <span class="st">"data.frame"</span>, baitCol <span class="op">=</span> <span class="st">"gene"</span>, oeCol <span class="op">=</span> <span class="st">"peak"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ls</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 2 interactions and 1 metadata column:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              bait     seqnames_oe ranges_oe |     score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; | &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]       gene1 ---        chr1  999-2000 |       5.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]       gene2 ---        chr2 1499-2500 |       6.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 2 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="r-in"><span>  <span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="st">"+"</span>, symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Pairs-class.html" class="external-link">Pairs</a></span><span class="op">(</span>first <span class="op">=</span> <span class="va">gr1</span>, second <span class="op">=</span> <span class="va">gr2</span>, elementMetadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/DataFrame-class.html" class="external-link">DataFrame</a></span><span class="op">(</span>symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu">Convert</span><span class="op">(</span><span class="va">pairs</span>, baitCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> unable to find an inherited method for function ‘linkSet’ for signature ‘anchor1 = "GRanges", anchor2 = "GRanges", specificCol = "NULL"’</span>
+<span class="r-in"><span>  <span class="va">ls</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 2 interactions and 1 metadata column:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              bait     seqnames_oe ranges_oe |     score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; | &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]       gene1 ---        chr1  999-2000 |       5.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]       gene2 ---        chr2 1499-2500 |       6.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 2 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

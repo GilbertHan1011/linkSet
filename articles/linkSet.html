@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,10 +128,14 @@ genomic analysis tools.</li>
 functions for analyzing and visualizing genomic interactions.</li>
 </ol>
 <p><img src="img%2Foverview.png" alt="Overview diagram of the linkSet class structure and its components" width="70%"></p>
-<p><img src="img%2Flinksetmethod.png" alt="Overview diagram of the linkSet class structure and its components" width="70%">
-## Construction The linkSet class can be constructed from various data
-types, including GRanges objects for both anchors, or character vectors
-for bait and GRanges for other ends.
+<p><img src="img%2Flinksetmethod.png" alt="Overview diagram of the linkSet methods" width="80%"></p>
+</div>
+<div class="section level2">
+<h2 id="construction">Construction<a class="anchor" aria-label="anchor" href="#construction"></a>
+</h2>
+<p>The linkSet class can be constructed from various data types,
+including GRanges objects for both anchors, or character vectors for
+bait and GRanges for other ends.
 <img src="img%2F9.10_data_structure.png" alt="data structure of the linkSet class" width="70%"></p>
 <p><img src="img%2FlinkSetImport.png" alt="Import methods" width="70%"></p>
 <div class="section level3">
@@ -543,7 +547,7 @@ interactions. 2. The distance between the bait and oe region.</p>
 <p>The <code>diagnose</code> function can help you to diagnose the
 <code>linkSet</code> object.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">diagnoseLinkSet</span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/diagnoseLinkSet-linkSet-method.html">diagnoseLinkSet</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
 <p><img src="linkSet_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; linkSet object with 5 interactions and 3 metadata columns:</span></span>
@@ -604,23 +608,25 @@ interactions. 2. The distance between the bait and oe region.</p>
 the exact bait region. The annotation function can help you to annotate
 the bait region from a gene annotation.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bait</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span>, <span class="st">"NONEXISTENT"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr3"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span>
+<span>               ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2000</span>, <span class="fl">3000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
+<span>               strand <span class="op">=</span> <span class="st">"+"</span>, symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span>, <span class="st">"NONEXISTENT"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span>
-<span>                ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span>, <span class="fl">7000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
-<span>                strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span>
-<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">bait</span>, <span class="va">gr2</span><span class="op">)</span></span>
+<span>               ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span>, <span class="fl">7000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
+<span>               strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span>
+<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Test annotatePromoter</span></span>
 <span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/annotatePromoter-linkSet-method.html">annotatePromoter</a></span><span class="op">(</span><span class="va">ls</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, upstream <span class="op">=</span> <span class="fl">500</span>,overwrite <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">annotated_ls</span></span>
-<span><span class="co">#&gt; linkSet object with 3 interactions and 0 metadata columns:</span></span>
-<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe</span></span>
-<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt;</span></span>
-<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099</span></span>
-<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099</span></span>
-<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 1 metadata column:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099 |          BRCA1</span></span>
+<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099 |           TP53</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099 |    NONEXISTENT</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -629,17 +635,62 @@ the bait region from a gene annotation.</p>
 <p>Functional enhancers usually regulate multiple genes, we can use
 cross gene analysis to identify the cross gene enhancers.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer</a></span><span class="op">(</span><span class="va">ls</span><span class="op">)</span></span>
-<span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderLinks-linkSet-method.html">orderLinks</a></span><span class="op">(</span><span class="va">ls</span>,by <span class="op">=</span> <span class="st">"crossFreq"</span>,decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">ls</span></span>
-<span><span class="co">#&gt; linkSet object with 3 interactions and 1 metadata column:</span></span>
-<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | crossFreq</span></span>
-<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; | &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099 |         1</span></span>
-<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099 |         1</span></span>
-<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099 |         1</span></span>
+<code class="sourceCode R"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer</a></span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span>
+<span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/orderLinks-linkSet-method.html">orderLinks</a></span><span class="op">(</span><span class="va">annotated_ls</span>,by <span class="op">=</span> <span class="st">"crossFreq"</span>,decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">annotated_ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 2 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol crossFreq</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099 |          BRCA1         1</span></span>
+<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099 |           TP53         1</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099 |    NONEXISTENT         1</span></span>
 <span><span class="co">#&gt;   -------</span></span>
-<span><span class="co">#&gt;   regions: 3 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
+<span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
+<p>linkSet also implement the <a href="https://www.nature.com/articles/s41596-021-00498-1" class="external-link"><code>CHiCANE</code>
+analysis</a>, which can identifying the high-confidence interactions.
+<strong>CHiCANE</strong> needs to count interactibility and dist before
+running the statistical test.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">countInteractibility</span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span>
+<span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="../reference/pairdist-linkSet-method.html">pairdist</a></span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span>
+<span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">run_chicane</span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Not found column 'bait.id', adding bait name as default."</span></span>
+<span><span class="co">#&gt; [1] "Not found column 'bait.to.bait' Set 'FALSE' as default."</span></span>
+<span><span class="co">#&gt; [1] "fitting model...."</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'data.table'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:SummarizedExperiment':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     shift</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:GenomicRanges':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     shift</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:IRanges':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     shift</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:S4Vectors':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     first, second</span></span>
+<span><span class="va">annotated_ls</span></span>
+<span><span class="co">#&gt; linkSet object with 3 interactions and 12 metadata columns:</span></span>
+<span><span class="co">#&gt;              bait     seqnames_oe ranges_oe | anchor1.symbol crossFreq</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1 ---        chr1 5000-5099 |          BRCA1         1</span></span>
+<span><span class="co">#&gt;   [2]        TP53 ---        chr2 6000-6099 |           TP53         1</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT ---        chr3 7000-7099 |    NONEXISTENT         1</span></span>
+<span><span class="co">#&gt;        inter_type     count bait.trans.count target.trans.count  distance</span></span>
+<span><span class="co">#&gt;       &lt;character&gt; &lt;integer&gt;        &lt;numeric&gt;          &lt;numeric&gt; &lt;integer&gt;</span></span>
+<span><span class="co">#&gt;   [1]       inter         1                0                  0      4000</span></span>
+<span><span class="co">#&gt;   [2]       intra         1                1                  1      &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   [3]       inter         1                0                  0      4000</span></span>
+<span><span class="co">#&gt;           bait.id bait.to.bait  expected   p.value   q.value</span></span>
+<span><span class="co">#&gt;       &lt;character&gt;    &lt;logical&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">#&gt;   [1]       BRCA1        FALSE         1  0.632121  0.632121</span></span>
+<span><span class="co">#&gt;   [2]        TP53        FALSE         1  0.632121  0.632121</span></span>
+<span><span class="co">#&gt;   [3] NONEXISTENT        FALSE         1  0.632121  0.632121</span></span>
+<span><span class="co">#&gt;   -------</span></span>
+<span><span class="co">#&gt;   regions: 6 ranges and 0 metadata columns</span></span>
 <span><span class="co">#&gt;   seqinfo: 3 sequences from an unspecified genome; no seqlengths</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -649,17 +700,17 @@ cross gene analysis to identify the cross gene enhancers.</p>
 link between bait and oe region.</p>
 <p>You can choose the oe-centric views to visualize the functional
 enhancer which regulate multiple genes.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10): score.col not</span></span>
 <span><span class="co">#&gt; found, using count as default</span></span></code></pre></div>
-<p><img src="linkSet_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
 <p>You can adjust the range of the views.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges</a></span><span class="op">(</span><span class="va">linkExample</span>,extend.base <span class="op">=</span> <span class="fl">10</span>,x.range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in plot_genomic_ranges(linkExample, extend.base = 10, x.range = c(50, :</span></span>
 <span><span class="co">#&gt; score.col not found, using count as default</span></span></code></pre></div>
-<p><img src="linkSet_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
+<p><img src="linkSet_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
