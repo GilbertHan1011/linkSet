@@ -441,7 +441,7 @@ or a covariate is a perfect predictor of count.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example usage of run_chicane function</span></span></span>
-<span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr3"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2000</span>, <span class="fl">3000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               strand <span class="op">=</span> <span class="st">"+"</span>, symbol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BRCA1"</span>, <span class="st">"TP53"</span>, <span class="st">"NONEXISTENT"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
@@ -450,18 +450,61 @@ or a covariate is a perfect predictor of count.</p>
 <span class="r-in"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="annotatePromoter-linkSet-method.html">annotatePromoter</a></span><span class="op">(</span><span class="va">ls</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, upstream <span class="op">=</span> <span class="fl">500</span>,overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">countInteractibility</span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No intra-chromosomal interactions found. Please run this function before you filterLinks.</span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="pairdist-linkSet-method.html">pairdist</a></span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Run run_chicane function</span></span></span>
 <span class="r-in"><span><span class="va">result_ls</span> <span class="op">&lt;-</span> <span class="fu">run_chicane</span><span class="op">(</span><span class="va">annotated_ls</span>, replicate.merging.method <span class="op">=</span> <span class="st">'sum'</span>, </span></span>
 <span class="r-in"><span>                         bait.filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, target.filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                         distance.bins <span class="op">=</span> <span class="cn">NULL</span>, multiple.testing.correction <span class="op">=</span> <span class="st">'bait-level'</span>, </span></span>
 <span class="r-in"><span>                         verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .verify.linkSet(linkSet):</span> linkSet must contain the columns:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  distance count bait.trans.count target.trans.count </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Please check wether you have run the function countInteractibility, pairdist and countInteractions before.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Not found column 'bait.id', adding bait name as default."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Not found column 'bait.to.bait' Set 'FALSE' as default."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FITTING MODEL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fitting model...."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘MASS’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:AnnotationDbi’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     select</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘data.table’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:SummarizedExperiment’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     shift</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:GenomicRanges’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     shift</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:IRanges’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     shift</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:S4Vectors’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     first, second</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> *</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no observations informative at iteration 1</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no observations informative at iteration 1</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>glm.fit: algorithm did not converge</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	trans interactions</span>
 <span class="r-in"><span><span class="va">result_ls</span>  </span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result_ls' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 3 interactions and 11 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              bait     seqnames_oe ranges_oe | anchor1.symbol  inter_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]       BRCA1 ---        chr1 5000-5099 |          BRCA1       intra</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        TP53 ---        chr2 6000-6099 |           TP53       intra</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3] NONEXISTENT ---        chr3 7000-7099 |    NONEXISTENT       intra</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           count bait.trans.count target.trans.count  distance     bait.id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;integer&gt;        &lt;numeric&gt;          &lt;numeric&gt; &lt;integer&gt; &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]         1                1                  1      &lt;NA&gt;       BRCA1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]         1                1                  1      &lt;NA&gt;        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]         1                1                  1      &lt;NA&gt; NONEXISTENT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       bait.to.bait  expected   p.value   q.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;logical&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]        FALSE         1  0.632121  0.632121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]        FALSE         1  0.632121  0.632121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]        FALSE         1  0.632121  0.632121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 6 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 712 sequences (1 circular) from 2 genomes (hg38, NA)</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
