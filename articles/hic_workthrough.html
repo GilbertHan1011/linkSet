@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,6 +105,11 @@ object</a>.</p>
 <code class="sourceCode R"><span><span class="va">hic_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"toyValidatePair"</span>, </span>
 <span>                        package<span class="op">=</span><span class="st">"linkSet"</span><span class="op">)</span></span>
 <span><span class="va">gi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Convert.html">readvalidPairs</a></span><span class="op">(</span><span class="va">hic_file</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Reading file...</span></span>
+<span><span class="co">#&gt; Warning in system(paste("grep '^#' ", file), intern = TRUE): running command</span></span>
+<span><span class="co">#&gt; 'grep '^#' /home/runner/work/_temp/Library/linkSet/extdata/toyValidatePair' had</span></span>
+<span><span class="co">#&gt; status 1</span></span>
+<span><span class="co">#&gt; Converting to GInteractions...</span></span>
 <span><span class="va">promoterGr</span> <span class="op">&lt;-</span> <span class="fu">withTxDb</span><span class="op">(</span><span class="st">"mm10"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">src</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu">Organism.dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicFeatures/man/transcripts.html" class="external-link">genes</a></span><span class="op">(</span><span class="va">src</span>, columns <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span>
 <span>  <span class="fu">IRanges</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/intra-range-methods.html" class="external-link">promoters</a></span><span class="op">(</span><span class="va">genes</span>, upstream <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
