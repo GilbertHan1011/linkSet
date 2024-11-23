@@ -56,7 +56,7 @@
 <span><span class="co"># S4 method for class 'ANY'</span></span>
 <span><span class="fu">Convert</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">readvalidPairs</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">readvalidPairs</span><span class="op">(</span><span class="va">file</span>, njobs <span class="op">=</span> <span class="fl">1</span>, format <span class="op">=</span> <span class="st">"validPairs"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,7 +76,15 @@
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
-<dd><p>A character string specifying the path to the validPairs file</p></dd>
+<dd><p>A character string specifying the path to the validPairs file or 4DN pairs file</p></dd>
+
+
+<dt id="arg-njobs">njobs<a class="anchor" aria-label="anchor" href="#arg-njobs"></a></dt>
+<dd><p>An integer specifying the number of threads to use for reading the file</p></dd>
+
+
+<dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
+<dd><p>A character string specifying the format of the file, either "validPairs" or "pair". Pair format should be "readID chr1 pos1 chr2 pos2 strand1 strand2". And validPairs should be "readID chr1 pos1 strand1 chr2 pos2 strand2".</p></dd>
 
 
 <dt id="arg-specificcol">specificCol<a class="anchor" aria-label="anchor" href="#arg-specificcol"></a></dt>
