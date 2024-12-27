@@ -1,6 +1,6 @@
 Package: linkSet
 Title: Base Classes for Storing Genomic Link Data
-Version: 0.99.3
+Version: 0.99.4
 Authors@R: 
     person("Gilbert", "Han", , "GilbertHan1011@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0000-0293-2467"))
