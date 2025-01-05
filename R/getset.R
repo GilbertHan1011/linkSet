@@ -50,7 +50,17 @@ setMethod("seqinfo", "linkSet", function(x) {
 
 ###############################################################
 # Exported getters for anchors.
-
+#' @rdname linkSet-accessors
+#' @aliases anchorIds
+#' @description
+#' This method returns the anchor IDs of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @param type The type of anchor to return. Can be "both", "bait", or "oe".
+#' @return A list of anchor IDs.
+#' @examples
+#' data(linkExample)
+#' anchorIds(linkExample, type="both")
 #' @export
 setMethod("anchorIds", "linkSet", function(x, type="both") {
   type <- match.arg(type, c("both", "bait", "oe"))
@@ -68,6 +78,18 @@ setMethod("anchorIds", "linkSet", function(x, type="both") {
 })
 
 
+#' @rdname linkSet-accessors
+#' @aliases anchors
+#' @description
+#' This method returns the anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @param type The type of anchor to return. Can be "both", "bait", or "oe".
+#' @param id If TRUE, returns the anchor IDs instead of the anchors.
+#' @return A list of anchors or anchor IDs.
+#' @examples
+#' data(linkExample)
+#' anchors(linkExample, type="both", id=FALSE)
 #' @export
 setMethod("anchors", "linkSet", function(x, type="both", id=FALSE) {
   if (id) {
@@ -90,23 +112,65 @@ setMethod("anchors", "linkSet", function(x, type="both", id=FALSE) {
 
 # Defining some convenience methods.
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases first
+#' @description
+#' This method returns the bait anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the bait anchors.
 setMethod("first", "linkSet", function(x) { anchors(x, type="bait") })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases second
+#' @description
+#' This method returns the other end (oe) anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the oe anchors.
 setMethod("second", "linkSet", function(x) { anchors(x, type="oe") })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases bait
+#' @description
+#' This method is an alias for 'first' and returns the bait anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the bait anchors.
 setMethod("bait", "linkSet", function(x) { anchors(x, type="bait") })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases oe
+#' @description
+#' This method is an alias for 'second' and returns the other end (oe) anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the oe anchors.
 setMethod("oe", "linkSet", function(x) { anchors(x, type="oe") })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases regions
+#' @description
+#' This method returns the regions of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the regions.
 setMethod("regions","linkSet",function(x){
   return(x@regions)
 })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases regionsBait
+#' @description
+#' This method returns the regions corresponding to the bait anchors of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @return A GRanges object containing the regions corresponding to the bait anchors.
 setMethod("regionsBait", "linkSet", function(x) {
   if (length(x@anchor1) == 0) {
     return(NULL)
@@ -115,31 +179,67 @@ setMethod("regionsBait", "linkSet", function(x) {
 })
 
 #' @export
-# replace method for bait
+#' @rdname linkSet-accessors
+#' @aliases bait
+#' @description
+#' This method replaces the bait anchors of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A GRanges object containing the new bait anchors.
+#' @return The modified linkSet object with the new bait anchors.
 setReplaceMethod("bait", "linkSet", function(x, value) {
   x@nameBait <- value
   return(x)
 })
 
 #' @export
+#' @rdname linkSet-accessors
+#' @aliases unchecked_regions
+#' @description
+#' This method replaces the regions of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A GRanges object containing the new regions.
+#' @return The modified linkSet object with the new regions.
 setReplaceMethod("unchecked_regions", "linkSet", function(x, value) {
     x@regions <- value
     return(x)        
 })
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases unchecked_anchor1
+#' @description
+#' This method replaces the anchor1 of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A vector containing the new anchor1 values.
+#' @return The modified linkSet object with the new anchor1 values.
 setReplaceMethod("unchecked_anchor1", "linkSet", function(x, value) {
     x@anchor1 <- value 
     return(x)        
 })
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases unchecked_anchor2
+#' @description
+#' This method replaces the anchor2 of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A vector containing the new anchor2 values.
+#' @return The modified linkSet object with the new anchor2 values.
 setReplaceMethod("unchecked_anchor2", "linkSet", function(x, value) {
     x@anchor2 <- value 
     return(x)        
 })
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases regions
+#' @description
+#' This method replaces the regions of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A GRanges object containing the new regions.
+#' @return The modified linkSet object with the new regions.
 setReplaceMethod("regions", "linkSet", function(x, value) {
   if (length(value)!=length(regions(x))) { 
       stop("assigned value must be of the same length as 'regions(x)'")
@@ -154,7 +254,14 @@ setReplaceMethod("regions", "linkSet", function(x, value) {
 
 
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases regionsBait
+#' @description
+#' This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A GRanges object containing the new regions corresponding to the bait anchors.
+#' @return The modified linkSet object with the new regions corresponding to the bait anchors.
 setReplaceMethod("regionsBait", "linkSet", function(x, value) {
   if (!is(value, "GRanges")) {
     stop("The 'value' must be a GRanges object")
@@ -174,7 +281,14 @@ setReplaceMethod("regionsBait", "linkSet", function(x, value) {
   return(x)
 })
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases oe
+#' @description
+#' This method replaces the other end (oe) anchors of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param value A GRanges object containing the new other end anchors.
+#' @return The modified linkSet object with the new other end anchors.
 setReplaceMethod("oe", "linkSet", function(x, value) {
   if (!is(value, "GRanges")) {
     stop("The 'value' must be a GRanges object")
@@ -191,12 +305,27 @@ setReplaceMethod("oe", "linkSet", function(x, value) {
 
 ###############################################################
 # Defining some other getters and setters.
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases $
+#' @description
+#' This method returns the metadata column of a linkSet object.
+#' 
+#' @param x A linkSet object.
+#' @param name A character string specifying the name of the metadata column to return.
+#' @return The value of the specified metadata column.
 setMethod("$", "linkSet", function(x, name) {
     return(mcols(x)[[name]])
 })
 
-#' @export
+#' @rdname linkSet-accessors
+#' @aliases $
+#' @description
+#' This method replaces the metadata column of a linkSet object with new values.
+#' 
+#' @param x A linkSet object.
+#' @param name A character string specifying the name of the metadata column to replace.
+#' @param value The new value to assign to the specified metadata column.
+#' @return The modified linkSet object with the new metadata column value.
 setReplaceMethod("$", "linkSet", function(x, name, value) {
     mcols(x)[[name]] <- value
     return(x)

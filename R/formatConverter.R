@@ -48,14 +48,14 @@ setMethod("Convert", signature(x = "GInteractions"), function(x, baitCol = NULL,
   parts <- strsplit(intervals, "[.:\\-]")
   
   # Check if all parts have exactly 3 elements
-  if (!all(sapply(parts, length) == 3)) {
+  if (!all(vapply(parts, length, FUN.VALUE = numeric(1)) == 3)) {
     stop("Please input peak format like chr1.816066.816566 or chr1:816066-816566")
   }
   
-  chromosomes <- sapply(parts, `[`, 1)
-  starts <- as.numeric(sapply(parts, `[`, 2)) - 1  # Convert to 0-based
-  ends <- as.numeric(sapply(parts, `[`, 3))
-  
+  # Extract components with proper type specification
+  chromosomes <- vapply(parts, `[`, FUN.VALUE = character(1), 1)  # First element is character (chromosome)
+  starts <- as.numeric(vapply(parts, `[`, FUN.VALUE = character(1), 2), USE.NAMES = FALSE)  # Convert to numeric after extraction
+  ends <- as.numeric(vapply(parts, `[`, FUN.VALUE = character(1), 3), USE.NAMES = FALSE)    # Convert to numeric after extraction
   # Create a GRanges object
   granges_obj <- GRanges(
     seqnames = Rle(chromosomes),
@@ -63,10 +63,12 @@ setMethod("Convert", signature(x = "GInteractions"), function(x, baitCol = NULL,
   )
   return(granges_obj)
 }
-
 #' Convert data.frame to linkSet
 #'
 #' @param x A data.frame object
+#' @param source The source of the data frame, either "data.frame" or "chicane"
+#' @param baitCol The column name in the data frame that contains the bait information
+#' @param oeCol The column name in the data frame that contains the other end information
 #' @param ... Additional arguments (not used)
 #' @rdname Convert
 #' @return A linkSet object
@@ -243,7 +245,7 @@ setMethod("Convert", signature(x = "ANY"), function(x, ...) {
 #' 
 #' 
 #'
-#' @param gi A GInteractions object
+#' @param x A GInteractions object
 #' @param geneGr A GRanges object representing genes
 #' @param peakGr A GRanges object representing peaks
 #' @param geneSymbol A character vector with same length as geneGr or column name in mcols(geneGr) for gene symbols

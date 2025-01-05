@@ -29,7 +29,8 @@
 #'         and intra-chromosomal interactions.
 #' }
 #'
-#' @importFrom GenomicRanges GRanges
+#' @importClassesFrom GenomicRanges GRanges
+#' @importFrom GenomicRanges flank narrow promoters resize trim
 #' @importFrom methods new setClass setGeneric setMethod
 #' @importFrom S4Vectors DataFrame
 #' @importFrom IRanges IRanges

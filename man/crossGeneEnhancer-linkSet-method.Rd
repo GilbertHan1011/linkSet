@@ -8,6 +8,8 @@
 \S4method{crossGeneEnhancer}{linkSet}(x, score_threshold = NULL)
 }
 \arguments{
+\item{x}{A linkSet object}
+
 \item{score_threshold}{The minimum score to filter interactions}
 }
 \value{

@@ -22,6 +22,8 @@
 )
 }
 \arguments{
+\item{linkSet}{A linkSet object}
+
 \item{score.col}{Column index that contains score information, used when \code{file.type} is bedpe. Default: NULL.}
 
 \item{score.threshold}{The score threshold, used when \code{score.col} is not NULL. Default: NULL.}
@@ -47,12 +49,6 @@
 \item{x.range}{The range of x-axis to show. Default: NULL.}
 
 \item{log.scale}{Logical value, whether to log1p the score. Default: TRUE.}
-
-\item{link.file}{File contains region link information.}
-
-\item{file.type}{The type of \code{link.file}, choose from bedpe, pairs. Default: bedpe.}
-
-\item{plot.curve}{One of 'curve' or 'bezier', for the latter it is required to install package \code{ggforce}. Default: 'curve'.}
 }
 \value{
 Plot.

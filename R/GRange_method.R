@@ -217,7 +217,8 @@ setMethod("width", "linkSet", function(x) {
 #' reduced_ls
 #'
 
-setMethod("reduceRegions", "linkSet", function(x, region = "both", countInteractions = TRUE, ...) {
+setMethod("reduceRegions", "linkSet", function(x, region = "both", 
+            countInteractions = TRUE, ...) {
 
   original_bait <- regionsBait(x)
   original_oe <- oe(x)

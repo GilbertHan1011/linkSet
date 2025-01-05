@@ -3,7 +3,6 @@
 \docType{class}
 \name{linkSet-class}
 \alias{linkSet-class}
-\alias{linkSet}
 \alias{LinkSet}
 \title{LinkSet object}
 \description{
@@ -51,6 +50,4 @@ x2
 }
 \seealso{
 \code{\link{linkSet}}
-
-\code{\link{linkSet-methods}}
 }

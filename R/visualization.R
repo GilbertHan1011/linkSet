@@ -1,12 +1,10 @@
 #' Add Genome Links to Coverage Plot.
 #'
-#' @param link.file File contains region link information.
-#' @param file.type The type of \code{link.file}, choose from bedpe, pairs. Default: bedpe.
+#' @param linkSet A linkSet object
 #' @param score.col Column index that contains score information, used when \code{file.type} is bedpe. Default: NULL.
 #' @param score.threshold The score threshold, used when \code{score.col} is not NULL. Default: NULL.
 #' @param score.color The score color vector. Default: c("grey70", "#56B1F7", "#132B43").
 #' @param scale.range Scale the height of links according to width, should be greater than or equal to 1 (not scale). Default: 10.
-#' @param plot.curve One of 'curve' or 'bezier', for the latter it is required to install package \code{ggforce}. Default: 'curve'.
 #' @param plot.space Top and bottom margin. Default: 0.1.
 #' @param plot.height The relative height of link to coverage plot. Default: 0.2.
 #' @param show.rect Logical value, whether to add rect border to the plot. Default: FALSE.
@@ -157,8 +155,8 @@ ggplot_add.interSet <- function(object, plot, object_name) {
     }
 
     y_limit <- ifelse(flip_arrow, 0, 1)
-    link.point.plot.pos = link.point.plot[link.point.plot$width > 0,]
-    link.point.plot.neg = link.point.plot[link.point.plot$width < 0,]
+    link.point.plot.pos <- link.point.plot[link.point.plot$width > 0,]
+    link.point.plot.neg <- link.point.plot[link.point.plot$width < 0,]
     link.basic.plot <-
       ggplot2::ggplot(data = link.point.plot) +
       ggplot2::geom_curve(
@@ -261,7 +259,6 @@ ggplot_add.interSet <- function(object, plot, object_name) {
   return(combined_plot)
 }
 
-
 #' Plot genomic ranges
 #'
 #' `geom_range()` and `geom_half_range()` draw tiles that are designed to
@@ -276,11 +273,17 @@ ggplot_add.interSet <- function(object, plot, object_name) {
 #' useful for comparing between two transcripts or free up plotting space for
 #' other transcript annotations (e.g. `geom_junction()`).
 #'
+#' @param bait_col Color for bait regions. Default is "red".
+#' @param oe_col Color for other end regions. Default is "DeepSkyBlue3".
+#' @param default_col Default color for regions. Default is "grey".
+#' @param minimal_width Minimal width for the range. Default is 0.01.
+#'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @inheritParams ggplot2::geom_tile
 #' @inheritParams ggplot2::geom_segment
 #' @inheritParams grid::rectGrob
+#' 
 #' @importFrom rlang %||%
 #'
 #' @return the return value of a `geom_*` function is not intended to be
@@ -526,10 +529,12 @@ extract_data_from_linkset <- function(linkset) {
 }
 
 
-
 #' linkSet-theme
 #' @export
 #' @rdname linkSet-theme
+#' @param x.range A numeric vector specifying the x-axis range.
+#' @param margin.len A numeric value specifying the margin length.
+#' @param show.rect A logical value indicating whether to show the rectangle.
 #' @examples
 #' data(linkExample)
 #' x.range <- c(0, 100)

@@ -8,6 +8,8 @@
 \S4method{orderLinks}{linkSet}(x, by = "count", decreasing = TRUE)
 }
 \arguments{
+\item{x}{A linkSet object}
+
 \item{by}{The column name to order by}
 
 \item{decreasing}{Whether to sort in decreasing order}

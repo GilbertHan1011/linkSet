@@ -9,6 +9,13 @@ theme_linkset(x.range, margin.len, show.rect)
 
 theme_range(x.range, show.rect)
 }
+\arguments{
+\item{x.range}{A numeric vector specifying the x-axis range.}
+
+\item{margin.len}{A numeric value specifying the margin length.}
+
+\item{show.rect}{A logical value indicating whether to show the rectangle.}
+}
 \description{
 linkSet-theme
 }

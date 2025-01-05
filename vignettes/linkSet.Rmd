@@ -299,7 +299,7 @@ Functional enhancers usually regulate multiple genes, we can use cross gene anal
 
 ```{r}
 annotated_ls <- crossGeneEnhancer(annotated_ls)
-annotated_ls <- orderLinks(annotated_ls,by = "crossFreq",decreasing = T)
+annotated_ls <- orderLinks(annotated_ls,by = "crossFreq",decreasing = TRUE)
 annotated_ls
 ```
 

@@ -35,6 +35,7 @@ setGeneric("anchor1<-", function(x, value) standardGeneric("anchor1<-"))
 #' @export
 setGeneric("anchor2<-", function(x, value) standardGeneric("anchor2<-"))
 
+#' @export
 setGeneric("unchecked_regions<-", function(x, value) standardGeneric("unchecked_regions<-"))
 setGeneric("unchecked_anchor1<-", function(x, value) standardGeneric("unchecked_anchor1<-"))
 setGeneric("unchecked_anchor2<-", function(x, value) standardGeneric("unchecked_anchor2<-"))

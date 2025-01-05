@@ -4,6 +4,8 @@ Version: 0.99.4
 Authors@R: 
     person("Gilbert", "Han", , "GilbertHan1011@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0000-0293-2467"))
+Author: Gilbert Han <GilbertHan1011@gmail.com>
+Maintainer: Gilbert Han <GilbertHan1011@gmail.com>
 Description: The goal of linkSet is to provide tools for working with gene-enhancer interactions, which is commonly seen in HiC, PC-HiC, and single-cell ATAC-seq data analysis. 
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -45,7 +47,7 @@ Suggests:
 Collate: class.R AllGenerics.R getset.R
         methods.R annotate.R distance.R formatConverter.R 
         linkSet-package.R GRange_method.R test_helper.R
-        visualization.R count.R statical.R
+        visualization.R count.R statical.R data.R
 biocViews: Software, HiC, DataRepresentation
 URL: https://github.com/GilbertHan1011/linkSet, https://gilberthan1011.github.io/linkSet, https://gilberthan1011.github.io/linkSet/
 BugReports: https://github.com/GilbertHan1011/linkSet/issues/new

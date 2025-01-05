@@ -332,7 +332,11 @@ setMethod("linkSet", c("GRanges", "GRanges","character_Or_missing"),
 )
 
 
-#' clean unused regions 
+#' Clean Unused Regions in a linkSet Object
+#' 
+#' This function removes unused regions from a linkSet object, ensuring that all regions are referenced by either anchor1 or anchor2.
+#' 
+#' @param x A linkSet object from which to remove unused regions.
 #' @export
 #' @examples
 #' data(linkExample)

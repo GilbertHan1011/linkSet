@@ -7,6 +7,9 @@
 \usage{
 \S4method{diagnoseLinkSet}{linkSet}(x)
 }
+\arguments{
+\item{x}{A linkSet object}
+}
 \description{
 Diagnose the linkSet object, return barplot of inter/intra interaction and distance distribution
 }

@@ -2,12 +2,15 @@
 % Please edit documentation in R/methods.R
 \name{clean_unused_regions,linkSet-method}
 \alias{clean_unused_regions,linkSet-method}
-\title{clean unused regions}
+\title{Clean Unused Regions in a linkSet Object}
 \usage{
 \S4method{clean_unused_regions}{linkSet}(x)
 }
+\arguments{
+\item{x}{A linkSet object from which to remove unused regions.}
+}
 \description{
-clean unused regions
+This function removes unused regions from a linkSet object, ensuring that all regions are referenced by either anchor1 or anchor2.
 }
 \examples{
 data(linkExample)

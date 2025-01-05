@@ -7,13 +7,13 @@
 \S4method{baitGInteractions}{GInteractions,GRanges,GRanges}(x, geneGr, peakGr, geneSymbol = NULL)
 }
 \arguments{
+\item{x}{A GInteractions object}
+
 \item{geneGr}{A GRanges object representing genes}
 
 \item{peakGr}{A GRanges object representing peaks}
 
 \item{geneSymbol}{A character vector with same length as geneGr or column name in mcols(geneGr) for gene symbols}
-
-\item{gi}{A GInteractions object}
 }
 \value{
 A linkSet object

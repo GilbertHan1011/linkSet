@@ -28,6 +28,10 @@ readvalidPairs(file, njobs = 1, format = "validPairs")
 
 \item{baitCol}{A character string specifying the column to use for bait naming}
 
+\item{source}{The source of the data frame, either "data.frame" or "chicane"}
+
+\item{oeCol}{The column name in the data frame that contains the other end information}
+
 \item{file}{A character string specifying the path to the validPairs file or 4DN pairs file}
 
 \item{njobs}{An integer specifying the number of threads to use for reading the file}

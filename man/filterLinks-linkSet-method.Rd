@@ -8,6 +8,8 @@
 \S4method{filterLinks}{linkSet}(x, filter_intra = TRUE, filter_unannotate = TRUE, distance = NULL)
 }
 \arguments{
+\item{x}{A linkSet object}
+
 \item{filter_intra}{Whether to filter intra-chromosomal interactions}
 
 \item{filter_unannotate}{Whether to filter unannotated interactions}

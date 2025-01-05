@@ -68,6 +68,12 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
+\item{bait_col}{Color for bait regions. Default is "red".}
+
+\item{oe_col}{Color for other end regions. Default is "DeepSkyBlue3".}
+
+\item{default_col}{Default color for regions. Default is "grey".}
+
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}'s \code{params} argument. These
 arguments broadly fall into one of 4 categories below. Notably, further
 arguments to the \code{position} argument, or aesthetics that are required
@@ -103,6 +109,8 @@ lists which parameters it can accept.
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
+
+\item{minimal_width}{Minimal width for the range. Default is 0.01.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.

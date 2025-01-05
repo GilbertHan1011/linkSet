@@ -2,27 +2,25 @@
 % Please edit documentation in R/count.R
 \name{countInteractions,linkSet-method}
 \alias{countInteractions,linkSet-method}
-\title{Make Repeated Interactions Unique and Count Repetitions}
+\alias{countBaitOe}
+\title{Count Bait and Other End Interactions}
 \usage{
 \S4method{countInteractions}{linkSet}(x, baitRegions = TRUE)
 }
 \arguments{
 \item{x}{A linkSet object}
+
+\item{baitRegions}{Whether to count bait regions}
 }
 \value{
-A list containing:
-\item{unique_linkSet}{A new linkSet object with unique interactions}
-\item{interaction_counts}{A data frame with counts for each unique interaction}
+A linkSet object with counts for each unique interaction
 }
 \description{
-This function takes a linkSet object, identifies repeated interactions
-(where both bait and other end are repeated), makes them unique, and
-counts the number of repetitions for each unique interaction.
+This function takes a linkSet object and counts the number of interactions for each bait and other end.
 }
 \examples{
 data(linkExample)
 linkSet = c(linkExample,linkExample)
-result <- countInteractions(linkSet)
-result
-
+linkSet = countInteractions(linkSet)
+linkSet
 }

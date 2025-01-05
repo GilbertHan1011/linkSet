@@ -86,7 +86,7 @@ ls <- filterLinks(ls,filter_intra = TRUE, filter_unannotate = TRUE, distance = 5
 Duplicated links are associated with contact frequency, so it's a good idea to count duplicated links.
 ```{r}
 ls <- countInteractions(ls)
-orderLinks(ls,by = "count",decreasing = T)
+orderLinks(ls,by = "count",decreasing = TRUE)
 ```
 
 We can notice that there is a significant link strength between `Sulf1` and `chr1:12785091-12785750`.
@@ -95,7 +95,7 @@ We can notice that there is a significant link strength between `Sulf1` and `chr
 Enhancers that regulate multiple genes are biologically meaningful.
 ```{r}
 ls <- crossGeneEnhancer(ls)
-ls <- orderLinks(ls,by = "crossFreq",decreasing = T)
+ls <- orderLinks(ls,by = "crossFreq",decreasing = TRUE)
 ls
 ```
 We can use `plot_genomic_ranges` to visualize the cross gene links.

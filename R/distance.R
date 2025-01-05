@@ -125,6 +125,7 @@ setMethod("pairdist", "linkSet", function(x, type="mid"){
 #' @examples
 #' data(linkExample)
 #' diagnoseLinkSet(linkExample)
+#' @param x A linkSet object
 setMethod("diagnoseLinkSet", "linkSet", function(x){
   if (!.exist_inter(x)){
     x <- annotateInter(x)

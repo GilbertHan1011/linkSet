@@ -20,10 +20,14 @@
 
   # Create new connection
   src <- if (genome == "hg38") {
-    require(TxDb.Hsapiens.UCSC.hg38.knownGene)
+    if (!requireNamespace("TxDb.Hsapiens.UCSC.hg38.knownGene", quietly = TRUE)) {
+    stop("Package TxDb.Hsapiens.UCSC.hg38.knownGene needed for this function")
+  }
     Organism.dplyr::src_organism("TxDb.Hsapiens.UCSC.hg38.knownGene")
   } else if (genome == "mm10") {
-    require(TxDb.Mmusculus.UCSC.mm10.knownGene)
+    if (!requireNamespace("TxDb.Mmusculus.UCSC.mm10.knownGene", quietly = TRUE)) {
+    stop("Package TxDb.Mmusculus.UCSC.mm10.knownGene needed for this function")
+  }
     Organism.dplyr::src_organism("TxDb.Mmusculus.UCSC.mm10.knownGene")
   } else {
     stop("Unsupported genome. Please use 'hg38' or 'mm10'.")

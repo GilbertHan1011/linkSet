@@ -1,7 +1,6 @@
 #== make linkObj-------------------------
 #' LinkSet object
 #' @export
-#' @aliases linkSet
 #' @aliases LinkSet
 #' @description The linkSet object is a container for storing gene-enhancer interactions.
 #' @details The linkSet object is a vectors of paired gene-enhancer interactions.
@@ -12,7 +11,6 @@
 #' @slot NAMES A character vector of the region names.
 #' @slot elementMetadata A DataFrame of the element metadata.
 #' @seealso \code{\link{linkSet}}
-#' @seealso \code{\link{linkSet-methods}}
 #' @examples
 #' showClass("linkSet")  # shows the known subclasses
 #' 
@@ -45,6 +43,16 @@ setClass("linkSet",
          )
 )
 
+#' Character or Missing Class Union
+#'
+#' @name character_Or_missing-class
+#' @docType class
+#' @description A class union of character vectors and missing values used in linkSet
+#' package for optional character arguments.
+#'
+#' @details This class is used internally by the linkSet package to handle optional
+#' character arguments, particularly in the linkSet constructor and methods.
+#'
 #' @export
 setClassUnion("character_Or_missing", c("character", "missing"))
 # setClassUnion("integer_Or_missing", c("integer", "missing"))

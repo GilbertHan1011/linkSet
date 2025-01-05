@@ -9,6 +9,33 @@
 \alias{regions}
 \alias{seqinfo,linkSet-method}
 \alias{seqinfo}
+\alias{anchorIds,linkSet-method}
+\alias{anchorIds}
+\alias{anchors,linkSet-method}
+\alias{anchors}
+\alias{first,linkSet-method}
+\alias{first}
+\alias{second,linkSet-method}
+\alias{second}
+\alias{bait,linkSet-method}
+\alias{bait}
+\alias{oe,linkSet-method}
+\alias{oe}
+\alias{regionsBait,linkSet-method}
+\alias{regionsBait}
+\alias{bait<-,linkSet-method}
+\alias{unchecked_regions<-,linkSet-method}
+\alias{unchecked_regions}
+\alias{unchecked_anchor1<-,linkSet-method}
+\alias{unchecked_anchor1}
+\alias{unchecked_anchor2<-,linkSet-method}
+\alias{unchecked_anchor2}
+\alias{regions<-,linkSet-method}
+\alias{regionsBait<-,linkSet-method}
+\alias{oe<-,linkSet-method}
+\alias{$,linkSet-method}
+\alias{$}
+\alias{$<-,linkSet-method}
 \title{linkSet-accessors}
 \usage{
 \S4method{anchor1}{linkSet}(x)
@@ -18,18 +45,128 @@
 \S4method{regions}{linkSet}(x)
 
 \S4method{seqinfo}{linkSet}(x)
+
+\S4method{anchorIds}{linkSet}(x, type = "both")
+
+\S4method{anchors}{linkSet}(x, type = "both", id = FALSE)
+
+\S4method{first}{linkSet}(x)
+
+\S4method{second}{linkSet}(x)
+
+\S4method{bait}{linkSet}(x)
+
+\S4method{oe}{linkSet}(x)
+
+\S4method{regions}{linkSet}(x)
+
+\S4method{regionsBait}{linkSet}(x)
+
+\S4method{bait}{linkSet}(x) <- value
+
+\S4method{unchecked_regions}{linkSet}(x) <- value
+
+\S4method{unchecked_anchor1}{linkSet}(x) <- value
+
+\S4method{unchecked_anchor2}{linkSet}(x) <- value
+
+\S4method{regions}{linkSet}(x) <- value
+
+\S4method{regionsBait}{linkSet}(x) <- value
+
+\S4method{oe}{linkSet}(x) <- value
+
+\S4method{$}{linkSet}(x, name)
+
+\S4method{$}{linkSet}(x, name) <- value
 }
 \arguments{
-\item{x}{A linkSet object}
+\item{x}{A linkSet object.}
+
+\item{type}{The type of anchor to return. Can be "both", "bait", or "oe".}
+
+\item{id}{If TRUE, returns the anchor IDs instead of the anchors.}
+
+\item{value}{The new value to assign to the specified metadata column.}
+
+\item{name}{A character string specifying the name of the metadata column to replace.}
 }
 \value{
 For the getters, values in various slots of x are returned,
 while for the setters, the slots of x are modified accordingly – see Details.
 
 A vector of the regions
+
+A list of anchor IDs.
+
+A list of anchors or anchor IDs.
+
+A GRanges object containing the bait anchors.
+
+A GRanges object containing the oe anchors.
+
+A GRanges object containing the bait anchors.
+
+A GRanges object containing the oe anchors.
+
+A GRanges object containing the regions.
+
+A GRanges object containing the regions corresponding to the bait anchors.
+
+The modified linkSet object with the new bait anchors.
+
+The modified linkSet object with the new regions.
+
+The modified linkSet object with the new anchor1 values.
+
+The modified linkSet object with the new anchor2 values.
+
+The modified linkSet object with the new regions.
+
+The modified linkSet object with the new regions corresponding to the bait anchors.
+
+The modified linkSet object with the new other end anchors.
+
+The value of the specified metadata column.
+
+The modified linkSet object with the new metadata column value.
 }
 \description{
 Methods to get and set fields in an linkSet object.
+
+This method returns the anchor IDs of a linkSet object.
+
+This method returns the anchors of a linkSet object.
+
+This method returns the bait anchors of a linkSet object.
+
+This method returns the other end (oe) anchors of a linkSet object.
+
+This method is an alias for 'first' and returns the bait anchors of a linkSet object.
+
+This method is an alias for 'second' and returns the other end (oe) anchors of a linkSet object.
+
+This method returns the regions of a linkSet object.
+
+This method returns the regions corresponding to the bait anchors of a linkSet object.
+
+This method replaces the bait anchors of a linkSet object with new values.
+
+This method replaces the regions of a linkSet object with new values.
+
+This method replaces the anchor1 of a linkSet object with new values.
+
+This method replaces the anchor2 of a linkSet object with new values.
+
+This method replaces the regions of a linkSet object with new values.
+
+This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
+
+This method replaces the other end (oe) anchors of a linkSet object with new values.
+
+This method returns the metadata column of a linkSet object.
+
+This method replaces the metadata column of a linkSet object with new values.
 }
 \examples{
 data(linkExample)
@@ -38,6 +175,10 @@ data(linkExample)
 anchor2(linkExample)
 data(linkExample)
 regions(linkExample)
+data(linkExample)
+anchorIds(linkExample, type="both")
+data(linkExample)
+anchors(linkExample, type="both", id=FALSE)
 }
 \author{
 Gilbert Han
