@@ -69,9 +69,13 @@ setMethod("show", "linkSet", function(object) {
   showLinkSet(object, margin="  ", print.seqinfo=TRUE, print.classinfo=TRUE, baitRegion=FALSE)
 })
 
-
 #' @export
 #' @rdname show
+#' @param object A linkSet object to be displayed.
+#' @param margin A character string to be used as the margin for the display.
+#' @param print.seqinfo A logical indicating whether to print sequence information.
+#' @param print.classinfo A logical indicating whether to print class information.
+#' @param baitRegion A logical indicating whether to display bait regions.
 #' @examples
 #' # Example usage of showLinkSet method for linkSet object
 #' gr1 <- GRanges(seqnames = c("chr1", "chr2", "chr3"),
@@ -161,7 +165,10 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
   ans
 }
 
-
+#' Format anchor information for display
+#' @importFrom GenomicRanges seqnames ranges
+#' @importFrom S4Vectors showAsCell
+#' @keywords internal
 .pasteAnchor <- function(x, append) {
   if(is.character(x)){
     out <- as.matrix(x)
@@ -197,7 +204,7 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
   return(list(anchor1=anchor1, anchor2=anchor2, regions=regions))
 }
 
-
+#' @keywords internal
 .new_LK <- function(anchor1, anchor2, nameBait, regions, metadata) {
   elementMetadata <- make_zero_col_DFrame(length(nameBait))
 
@@ -324,7 +331,7 @@ setMethod("linkSet", c("GRanges", "GRanges","character_Or_missing"),
 
             out <- .new_LK(anchor1=anchor1, anchor2=anchor2,
                            nameBait=nameBait,
-                           region= regions,
+                           regions= regions,
                            metadata=metadata)
             mcols(out) <- mcolBind
             out

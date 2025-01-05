@@ -48,7 +48,6 @@ setMethod("countInteractions", "linkSet", function(x, baitRegions = TRUE) {
 
 
 #' Count bait and oe
-#' @aliases countBaitOe
 #' @param x A linkSet object
 #' @param baitRegions Whether to count bait regions
 #' @description This function calculate the number of trans interactions for each bait and oe. The word "interactibility" can refer to https://doi.org/10.1038%2Fnature11279.

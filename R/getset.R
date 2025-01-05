@@ -321,7 +321,7 @@ setMethod("$", "linkSet", function(x, name) {
 #' @aliases $
 #' @description
 #' This method replaces the metadata column of a linkSet object with new values.
-#' 
+#' @importFrom S4Vectors mcols mcols<-
 #' @param x A linkSet object.
 #' @param name A character string specifying the name of the metadata column to replace.
 #' @param value The new value to assign to the specified metadata column.

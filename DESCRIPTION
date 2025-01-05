@@ -17,7 +17,6 @@ Depends:
     R (>= 2.10)
 Imports: 
     methods,
-    Matrix,
     IRanges,
     GenomeInfoDb,
     BiocGenerics,
@@ -26,13 +25,14 @@ Imports:
     ggplot2,
     patchwork,
     scales,
-    dplyr,
     foreach,
     iterators,
     stats,
     rlang,
     MASS,
-    data.table
+    data.table,
+    DBI,
+    doParallel
 Suggests: 
     knitr,
     rmarkdown,
@@ -42,6 +42,7 @@ Suggests:
     org.Mm.eg.db,
     org.Hs.eg.db,
     GenomicFeatures,
+    GenomicInteractions,
     gamlss,
     gamlss.tr
 Collate: class.R AllGenerics.R getset.R

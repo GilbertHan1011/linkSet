@@ -628,7 +628,13 @@ theme_range <- function(x.range, show.rect) {
   }
 }
 
-
+#' Plot baits in a linkSet object
+#' @title Plot Baits
+#' @importFrom rlang .data
+#' @name plotBaits
+#' @param linkset A linkSet object
+#' @param ... Additional plotting parameters
+#' @return A ggplot object
 #' @export
 plotBaits <- function(linkset, scoreCol = "score", countCol = "count", n = 4, baits = NULL, plotBaitNames = TRUE, 
                       plevel1 = 5, plevel2 = 3, outfile = NULL,

@@ -10,6 +10,7 @@
 #' 
 #' @return A linkSet object
 #' @export
+#' @importFrom S4Vectors mcols mcols<-
 #' @examples
 #' library(InteractionSet)
 #' gi <- GInteractions(anchor1 = c(1, 2), anchor2 = c(3, 4), regions = GRanges(seqnames = c("chr1", "chr1", "chr2", "chr2"),
@@ -43,6 +44,9 @@ setMethod("Convert", signature(x = "GInteractions"), function(x, baitCol = NULL,
   return(ls)
 })
 
+#' Convert string intervals to GRanges
+#' @importFrom S4Vectors Rle
+#' @keywords internal
 .convert_to_grange <- function(intervals) {
   # convert "chr1.816066.816566" or "chr1:816066-816566" to grange format
   parts <- strsplit(intervals, "[.:\\-]")
@@ -624,6 +628,9 @@ setMethod("as.data.frame", "linkSet", function(x) {
   proxOE
   }
 
+#' Export to linkSet format
+#' @keywords internal
+#' @importFrom rlang .data
 .exportToLinkSet <- function(cd, scoreCol="score", cutoff=0, b2bcutoff=NULL,
                        order=c("position", "score")[1], removeMT=TRUE)
 {

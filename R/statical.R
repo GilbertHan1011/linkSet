@@ -130,6 +130,9 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 #'	Verify that linkSet object is in expected format. Throws an error if object does not fit requirements.
 #'
 #' @param linkSet Object to be verified.
+#' @importFrom methods is
+#' @importFrom S4Vectors mcols mcols<-
+#' @keywords internal
 #' @rdname chicane
 #' @return None
 #'
@@ -520,6 +523,7 @@ fit.model <- function(
 #' @importFrom foreach %dopar%
 #' @importFrom iterators icount
 #' @importFrom stats logLik
+#' @importFrom rlang .data
 run.model.fitting <- function(
 	interaction.data,
 	distance.bins = NULL, 
@@ -1113,7 +1117,12 @@ fit.glm <- function(
 	) {
 
 	distribution <- match.arg(distribution);
-
+	if (distribution %in% c('truncated-poisson', 'truncated-negative-binomial')) {
+    if (!requireNamespace("gamlss.tr", quietly = TRUE)) {
+            stop("Package 'gamlss.tr' needed for truncated distributions. Please install it.",
+                 call. = FALSE)
+        }
+    }
 	### MAIN ##################################################################
 
 	# get observed counts
@@ -1204,7 +1213,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = POtr(), 
+				family = gamlss.tr::POtr(), 
 				control = gamlss.control
 				);
 
@@ -1235,7 +1244,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = NBItr(), 
+				family = gamlss.tr::NBItr(), 
 				control = gamlss.control
 				);
 
@@ -1247,7 +1256,7 @@ fit.glm <- function(
 					# Solution: set to 1 if observed count is lowest it can be
 					p.value <- ifelse(
 						observed >= 2,
-						pNBItr(
+						gamlss.tr::pNBItr(
 							observed - 1, 
 							mu = mu, 
 							sigma = sigma,

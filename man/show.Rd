@@ -15,6 +15,17 @@
   baitRegion = FALSE
 )
 }
+\arguments{
+\item{object}{A linkSet object to be displayed.}
+
+\item{margin}{A character string to be used as the margin for the display.}
+
+\item{print.seqinfo}{A logical indicating whether to print sequence information.}
+
+\item{print.classinfo}{A logical indicating whether to print class information.}
+
+\item{baitRegion}{A logical indicating whether to display bait regions.}
+}
 \description{
 Display detailed information about a linkSet object
 }

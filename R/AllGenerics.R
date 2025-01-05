@@ -24,18 +24,23 @@ setGeneric("anchorIds", function(x, ...) standardGeneric("anchorIds"))
 
 ## set functions for linkSet
 #' @export
+#' @rdname linkSet-accessors
 setGeneric("bait<-", function(x, value) standardGeneric("bait<-"))
 
 #' @export
+#' @rdname linkSet-accessors
 setGeneric("regions<-", function(x, value) standardGeneric("regions<-"))
 
 #' @export
+#' @rdname linkSet-accessors
 setGeneric("anchor1<-", function(x, value) standardGeneric("anchor1<-"))
 
 #' @export
+#' @rdname linkSet-accessors
 setGeneric("anchor2<-", function(x, value) standardGeneric("anchor2<-"))
 
 #' @export
+#' @rdname linkSet-accessors
 setGeneric("unchecked_regions<-", function(x, value) standardGeneric("unchecked_regions<-"))
 setGeneric("unchecked_anchor1<-", function(x, value) standardGeneric("unchecked_anchor1<-"))
 setGeneric("unchecked_anchor2<-", function(x, value) standardGeneric("unchecked_anchor2<-"))

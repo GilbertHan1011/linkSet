@@ -2,7 +2,6 @@
 % Please edit documentation in R/count.R
 \name{countInteractibility,linkSet-method}
 \alias{countInteractibility,linkSet-method}
-\alias{countBaitOe}
 \title{Count bait and oe}
 \usage{
 \S4method{countInteractibility}{linkSet}(x, baitRegions = TRUE)

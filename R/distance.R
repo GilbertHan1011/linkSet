@@ -28,10 +28,12 @@ setMethod("annotateInter", "linkSet", function(x) {
 }
 )
 
+#' @importFrom S4Vectors mcols mcols<-
 .exist_inter <- function(x){
   !is.null(mcols(x)$inter_type)
   }
 
+#' @importFrom S4Vectors mcols mcols<-
 .exist_distance <- function(x){
   !is.null(mcols(x)$distance)
   }
