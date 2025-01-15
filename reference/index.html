@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,10 +83,16 @@
         <dd>Convert GInteractions with bait range and oe ranges to linkSet</dd>
       </dl><dl><dt>
 
+          <code><a href="character_Or_missing-class.html">character_Or_missing-class</a></code>
+
+        </dt>
+        <dd>Character or Missing Class Union</dd>
+      </dl><dl><dt>
+
           <code><a href="clean_unused_regions-linkSet-method.html">clean_unused_regions(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
-        <dd>clean unused regions</dd>
+        <dd>Clean Unused Regions in a linkSet Object</dd>
       </dl><dl><dt>
 
           <code><a href="countInteractibility-linkSet-method.html">countInteractibility(<i>&lt;linkSet&gt;</i>)</a></code>
@@ -98,7 +104,7 @@
           <code><a href="countInteractions-linkSet-method.html">countInteractions(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
-        <dd>Make Repeated Interactions Unique and Count Repetitions</dd>
+        <dd>Count Bait and Other End Interactions</dd>
       </dl><dl><dt>
 
           <code><a href="crossGeneEnhancer-linkSet-method.html">crossGeneEnhancer(<i>&lt;linkSet&gt;</i>)</a></code>
@@ -149,19 +155,37 @@
         <dd>Plot genomic ranges</dd>
       </dl><dl><dt>
 
+          <code><a href="linkExample.html">linkExample</a></code>
+
+        </dt>
+        <dd>Example linkSet Object</dd>
+      </dl><dl><dt>
+
           <code><a href="linkSet-GRange-Methods.html">trim(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resize(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">resizeRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrow(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">narrowRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shift(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">shiftRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flank(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">flankRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoters(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">promoterRegions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">width(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-GRange-Methods.html">reduce(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>linkSet-GRange-Methods</dd>
       </dl><dl><dt>
 
-          <code><a href="linkSet-accessors.html">anchor1(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchor2(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">seqinfo(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="linkSet-GRanges-GRanges-character_Or_missing-method.html">linkSet(<i>&lt;GRanges&gt;</i>,<i>&lt;GRanges&gt;</i>,<i>&lt;character_Or_missing&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Create a linkSet object from input data</dd>
+      </dl><dl><dt>
+
+          <code><a href="linkSet-accessors.html">`bait&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor1&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor2&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`unchecked_regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">anchor1(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchor2(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">seqinfo(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchorIds(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchors(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">first(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">second(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">bait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">oe(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regionsBait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor1&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor2&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`regionsBait&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`oe&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>linkSet-accessors</dd>
       </dl><dl><dt>
 
-          <code><a href="linkSet-class.html">linkSet-class</a></code> <code><a href="linkSet-class.html">linkSet</a></code> <code><a href="linkSet-class.html">LinkSet</a></code>
+          <code><a href="linkSet-character-GRanges-character_Or_missing-method.html">linkSet(<i>&lt;character&gt;</i>,<i>&lt;GRanges&gt;</i>,<i>&lt;character_Or_missing&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Create a linkSet object from input data</dd>
+      </dl><dl><dt>
+
+          <code><a href="linkSet-class.html">linkSet-class</a></code> <code><a href="linkSet-class.html">LinkSet</a></code>
 
         </dt>
         <dd>LinkSet object</dd>
@@ -195,6 +219,12 @@
 
         </dt>
         <dd>Calculate the distance between bait and the other end</dd>
+      </dl><dl><dt>
+
+          <code><a href="plotBaits.html">plotBaits()</a></code>
+
+        </dt>
+        <dd>Plot Baits</dd>
       </dl><dl><dt>
 
           <code><a href="plot_genomic_ranges-linkSet-method.html">plot_genomic_ranges(<i>&lt;linkSet&gt;</i>)</a></code>

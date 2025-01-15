@@ -61,7 +61,7 @@ In such cases, the Poisson distribution may be a suitable alternative."><meta pr
 
     <a class="navbar-brand me-2" href="../index.html">linkSet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -324,7 +324,7 @@ of the data</p>
 <span class="r-in"><span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html" class="external-link">GRanges</a></span><span class="op">(</span>seqnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"chr1"</span>, <span class="st">"chr2"</span>, <span class="st">"chr3"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               ranges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/IRanges/man/IRanges-constructor.html" class="external-link">IRanges</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5000</span>, <span class="fl">6000</span>, <span class="fl">7000</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               strand <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="linkSet.html">linkSet</a></span><span class="op">(</span><span class="va">gr1</span>, <span class="va">gr2</span>, specificCol <span class="op">=</span> <span class="st">"symbol"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="annotatePromoter-linkSet-method.html">annotatePromoter</a></span><span class="op">(</span><span class="va">ls</span>, genome <span class="op">=</span> <span class="st">"hg38"</span>, upstream <span class="op">=</span> <span class="fl">500</span>,overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">countInteractibility</span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">annotated_ls</span> <span class="op">&lt;-</span> <span class="fu">linkSet</span><span class="fu">::</span><span class="fu"><a href="pairdist-linkSet-method.html">pairdist</a></span><span class="op">(</span><span class="va">annotated_ls</span><span class="op">)</span></span></span>
@@ -337,11 +337,6 @@ of the data</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Not found column 'bait.to.bait' Set 'FALSE' as default."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> FITTING MODEL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fitting model...."</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘MASS’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:AnnotationDbi’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     select</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘data.table’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:SummarizedExperiment’:</span>

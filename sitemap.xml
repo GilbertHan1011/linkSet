@@ -13,6 +13,7 @@
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/as.GInteractions-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/as.data.frame-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/baitGInteractions-GInteractions-GRanges-GRanges-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/character_Or_missing-class.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/chicane.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/clean_unused_regions-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/countInteractibility-linkSet-method.html</loc></url>
@@ -20,14 +21,20 @@
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/crossGeneEnhancer-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/diagnoseLinkSet-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/dot-check.split.data.numerical.fit.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/dot-convert_to_grange.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/dot-exportToLinkSet.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/dot-pasteAnchor.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/exportInterBed-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/exportWashU-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/filterLinks-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/geom_linkset-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/geom_range.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/index.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/linkExample.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-GRange-Methods.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-GRanges-GRanges-character_Or_missing-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-accessors.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-character-GRanges-character_Or_missing-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-class.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-package.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet-subset-methods.html</loc></url>
@@ -35,6 +42,7 @@
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/linkSet.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/orderLinks-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/pairdist-linkSet-method.html</loc></url>
+<url><loc>https://gilberthan1011.github.io/linkSet/reference/plotBaits.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/plot_genomic_ranges-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/reduceRegions-linkSet-method.html</loc></url>
 <url><loc>https://gilberthan1011.github.io/linkSet/reference/show.html</loc></url>
