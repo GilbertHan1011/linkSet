@@ -39,7 +39,7 @@ setValidity2("linkSet", function(object) {
 
 
 setMethod("parallel_slot_names", "linkSet", function(x) {
-  base_slots <- callNextMethod() # Get the base slots from the parent class
+  base_slots <- methods::callNextMethod() # Get the base slots from the parent class
   if (length(x@anchor1) == 0) {
     c("anchor2", "nameBait", "NAMES", base_slots)
   } else {
@@ -101,11 +101,11 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
     baitRegion <- FALSE
   }
   if (baitRegion) {
-    out <- makePrettyMatrixForCompactPrinting(x, function(x) {
+    out <- S4Vectors::makePrettyMatrixForCompactPrinting(x, function(x) {
       .makeNakedMatFromGInteractions(x, baitRegion=TRUE)
     })
   } else {
-    out <- makePrettyMatrixForCompactPrinting(x, .makeNakedMatFromGInteractions)
+    out <- S4Vectors::makePrettyMatrixForCompactPrinting(x, .makeNakedMatFromGInteractions)
   }
 
   if (print.classinfo) {
@@ -116,8 +116,8 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
       .COL2CLASS <- c(bait = "character", "   " = "", seqnames_oe = "Rle", ranges_oe = "IRanges")
     }
     extraColumnNames <- GenomicRanges:::extraColumnSlotNames(x)
-    .COL2CLASS <- c(.COL2CLASS, getSlots(class(x))[extraColumnNames])
-    classinfo <- makeClassinfoRowForCompactPrinting(x, .COL2CLASS)
+    .COL2CLASS <- c(.COL2CLASS, methods::getSlots(class(x))[extraColumnNames])
+    classinfo <- S4Vectors::makeClassinfoRowForCompactPrinting(x, .COL2CLASS)
     classinfo[,"   "] <- ""
     stopifnot(identical(colnames(classinfo), colnames(out)))
     out <- rbind(classinfo, out)
@@ -212,7 +212,7 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
   anchor1 <- as.integer(anchor1)
   anchor2 <- as.integer(anchor2)
   if (is.null(nameBait)){
-    nameBait <- paste(gr1)
+    nameBait <- paste(regions[anchor1])
   }
   msg <- .check_inputs(anchor1, anchor2, nameBait, regions)
   if (is.character(msg)) { stop(msg) }
@@ -233,6 +233,14 @@ setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE,
       metadata=as.list(metadata))
 }
 
+
+#' Create a linkSet object from input data
+#' @param anchor1 For the first method, a character vector of bait names. For the second method, a GRanges object containing anchor1 regions.
+#' @param anchor2 A GRanges object containing anchor2 regions
+#' @param specificCol Optional character vector specifying names for the baits. Can be either a column name from anchor1's metadata or a vector of names.
+#' @param metadata Optional list of metadata to store
+#' @param ... Additional columns to add to the linkSet's elementMetadata
+#' @return A linkSet object containing the interaction data
 #' @export
 setMethod("linkSet", c("character", "GRanges","character_Or_missing"),
           function(anchor1, anchor2, specificCol,metadata=list(),  ...) {
@@ -278,6 +286,13 @@ setMethod("linkSet", c("character", "GRanges","character_Or_missing"),
   return(list(indices=split(refdex, obj.dex), ranges=combined))
 }
 
+#' Create a linkSet object from input data
+#' @param anchor1 For the first method, a character vector of bait names. For the second method, a GRanges object containing anchor1 regions.
+#' @param anchor2 A GRanges object containing anchor2 regions
+#' @param specificCol Optional character vector specifying names for the baits. Can be either a column name from anchor1's metadata or a vector of names.
+#' @param metadata Optional list of metadata to store
+#' @param ... Additional columns to add to the linkSet's elementMetadata
+#' @return A linkSet object containing the interaction data
 #' @export
 setMethod("linkSet", c("GRanges", "GRanges","character_Or_missing"),
           function(anchor1, anchor2, specificCol,metadata=list(),  ...) {
@@ -337,7 +352,6 @@ setMethod("linkSet", c("GRanges", "GRanges","character_Or_missing"),
             out
           }
 )
-
 
 #' Clean Unused Regions in a linkSet Object
 #' 
@@ -407,7 +421,7 @@ setMethod("subsetBaitRegion", "linkSet", function(x, subset) {
     subset <- .convert_to_grange(subset)
   }
   overlaps <- findOverlaps(bait_regions, subset)
-  idx <- queryHits(overlaps)
+  idx <- S4Vectors::queryHits(overlaps)
   clean_unused_regions(x[idx])
 })
 
@@ -429,7 +443,7 @@ setMethod("subsetOE", "linkSet", function(x, subset) {
     subset <- .convert_to_grange(subset)
   }
   overlaps <- findOverlaps(oe_regions, subset)
-  idx <- queryHits(overlaps)
+  idx <- S4Vectors::queryHits(overlaps)
   ls = x[idx]
   ls = clean_unused_regions(ls)
 })

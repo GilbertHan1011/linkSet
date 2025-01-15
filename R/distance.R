@@ -146,7 +146,7 @@ setMethod("diagnoseLinkSet", "linkSet", function(x){
   # Ensure we have both 'inter' and 'intra' types
   df2$inter_type <- factor(df2$inter_type, levels = c("inter", "intra"))
   
-  p2 <- ggplot2::ggplot(df2, ggplot2::aes(x = inter_type, y = ggplot2::after_stat(prop), group = 1)) +
+  p2 <- ggplot2::ggplot(df2, ggplot2::aes(x = inter_type, y = ..prop.., group = 1)) +
     ggplot2::geom_bar(fill = "steelblue") +
     ggplot2::labs(title = "Inter/Intra Interaction", x = "Interaction Type", y = "Percentage") +
     ggplot2::scale_x_discrete(drop = FALSE) +  # This ensures both levels are shown

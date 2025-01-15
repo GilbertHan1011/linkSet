@@ -21,16 +21,21 @@
   # Create new connection
   src <- if (genome == "hg38") {
     if (!requireNamespace("TxDb.Hsapiens.UCSC.hg38.knownGene", quietly = TRUE)) {
-    stop("Package TxDb.Hsapiens.UCSC.hg38.knownGene needed for this function")
-  }
+      stop("Package TxDb.Hsapiens.UCSC.hg38.knownGene needed for this function")
+    }
     Organism.dplyr::src_organism("TxDb.Hsapiens.UCSC.hg38.knownGene")
+  } else if (genome == "hg19") {
+    if (!requireNamespace("TxDb.Hsapiens.UCSC.hg19.knownGene", quietly = TRUE)) {
+      stop("Package TxDb.Hsapiens.UCSC.hg19.knownGene needed for this function")
+    }
+    Organism.dplyr::src_organism("TxDb.Hsapiens.UCSC.hg19.knownGene")
   } else if (genome == "mm10") {
     if (!requireNamespace("TxDb.Mmusculus.UCSC.mm10.knownGene", quietly = TRUE)) {
-    stop("Package TxDb.Mmusculus.UCSC.mm10.knownGene needed for this function")
-  }
+      stop("Package TxDb.Mmusculus.UCSC.mm10.knownGene needed for this function")
+    }
     Organism.dplyr::src_organism("TxDb.Mmusculus.UCSC.mm10.knownGene")
   } else {
-    stop("Unsupported genome. Please use 'hg38' or 'mm10'.")
+    stop("Unsupported genome. Please use 'hg38', 'hg19' or 'mm10'.")
   }
 
   # Store the connection
@@ -143,8 +148,8 @@ reg.finalizer(.dbCache, function(e) {
 #' print(result)
 setMethod("withTxDb", signature(x = "character", expr = "function"),
   function(x, expr, ...) {
-    if (!x %in% c("mm10", "hg38")) {
-      stop("Unsupported genome. Please use 'hg38' or 'mm10'.")
+    if (!x %in% c("mm10", "hg38", "hg19")) {
+      stop("Unsupported genome. Please use 'hg38', 'hg19' or 'mm10'.")
     }
     
     src <- .getDBConnection(x)

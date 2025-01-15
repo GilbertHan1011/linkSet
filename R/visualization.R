@@ -486,8 +486,9 @@ setMethod("plot_genomic_ranges", "linkSet", function(linkset, showBait = NULL,
     data <- extract_data_from_linkset(linkset)
 
     # Create the base plot
-    p <- ggplot2::ggplot(data, ggplot2::aes(xstart =  xstart, xend = xend, region = region)) +
+    p <- ggplot2::ggplot(data = data) +
         geom_range(
+            ggplot2::aes(xstart = xstart, xend = xend, region = region),
             minimal_width = minimal_width,
             bait_col = bait_col,
             oe_col = oe_col,
@@ -631,6 +632,7 @@ theme_range <- function(x.range, show.rect) {
 #' Plot baits in a linkSet object
 #' @title Plot Baits
 #' @importFrom rlang .data
+#' @importFrom GenomicRanges strand
 #' @name plotBaits
 #' @param linkset A linkSet object
 #' @param ... Additional plotting parameters
@@ -696,7 +698,7 @@ plotBaits <- function(linkset, scoreCol = "score", countCol = "count", n = 4, ba
       as.character(bait)
     }
     p <- ggplot2::ggplot(plotDf, 
-                         ggplot2::aes(x = oe_middle, y = .data[[countCol]], color = color_factor)) +
+                         ggplot2::aes(x = .data$oe_middle, y = .data[[countCol]], color = .data$color_factor)) +
       ggplot2::geom_point() +
       ggplot2::geom_vline(xintercept = bait_middle, color = "grey", linetype = "dashed") +
       ggplot2::labs(title = title, x = "Distance from viewpoint", y = countCol) +

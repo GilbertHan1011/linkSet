@@ -190,11 +190,12 @@ setMethod("Convert", signature(x = "Pairs"), function(x,baitCol = NULL, ...) {
 #'
 #' @param x An object of unsupported class
 #' @param ... Additional arguments (not used)
+#' @param baitCol A character string specifying the column to use for bait naming
 #'
 #' @rdname Convert
 #' @return Nothing, throws an error
 #' @export
-setMethod("Convert", signature(x = "ANY"), function(x, ...) {
+setMethod("Convert", signature(x = "ANY"), function(x, baitCol = NULL, ...) {
   if (inherits(x, "GenomicInteractions")) {
     if (!requireNamespace("GenomicInteractions", quietly = TRUE)) {
       stop("Package 'GenomicInteractions' is needed for this function to work. Please install it.",
@@ -672,13 +673,13 @@ setMethod("as.data.frame", "linkSet", function(x) {
   
   x = x[, c("baitID", "otherEndID", "N", scoreCol,"distSign","isBait2bait"), with=FALSE]
   
-  data.table::setkey(x, otherEndID)
-  data.table::setkey(rmap, otherEndID)
+  data.table::setkey(x, "otherEndID")
+  data.table::setkey(rmap, "otherEndID")
   
   x = merge(x, rmap, by="otherEndID", allow.cartesian = TRUE)
-  data.table::setkey(x, baitID)
+  data.table::setkey(x, "baitID")
   
-  data.table::setkey(baitmap, baitID)  
+  data.table::setkey(baitmap, "baitID")  
   x = merge(x, baitmap, by="baitID", allow.cartesian = TRUE)
   
   # note that baitmapGeneIDcol has been renamed into "promID" above 
@@ -746,7 +747,6 @@ setMethod("as.GInteractions", "linkSet", function(x) {
   mcols(gi) = metadata
   return(gi)
 })
-
 #' Export linkSet to interBed format
 #' 
 #' @param x A linkSet object
@@ -771,7 +771,7 @@ setMethod("exportInterBed", "linkSet", function(x, outfile) {
 
   out <- cbind(gr1, bait_name = gr1Name, gr2, otherEnd_name = gr2Name, metaDf)
 
-  write.table(out, outfile, sep="\t", quote=FALSE, row.names=FALSE)
+  utils::write.table(out, outfile, sep="\t", quote=FALSE, row.names=FALSE)
 })
 
 #' Export linkSet to WashU format
@@ -801,5 +801,5 @@ setMethod("exportWashU", "linkSet", function(x, outfile) {
     out = cbind(gr1, bait_name = gr1Name, gr2, otherEnd_name = gr2Name)
   }
 
-  write.table(out, outfile, sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
+  utils::write.table(out, outfile, sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
 })

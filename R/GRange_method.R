@@ -210,6 +210,7 @@ setMethod("width", "linkSet", function(x) {
 #'
 #' @importFrom GenomicRanges reduce findOverlaps
 #' @importFrom IRanges IRanges
+#' @importFrom S4Vectors subjectHits
 #'
 #' @examples
 #' data(linkExample)
@@ -226,13 +227,13 @@ setMethod("reduceRegions", "linkSet", function(x, region = "both",
   if (region == "bait" || region == "both") {
     bait_reduced <- GenomicRanges::reduce(original_bait, ...)
     bait_overlaps <- findOverlaps(original_bait, bait_reduced)
-    new_bait_regions <- bait_reduced[subjectHits(bait_overlaps)]
+    new_bait_regions <- bait_reduced[S4Vectors::subjectHits(bait_overlaps)]
     regionsBait(x) <- new_bait_regions
   }
   if (region == "oe" || region == "both") {
     oe_reduced <- GenomicRanges::reduce(original_oe, ...)
     oe_overlaps <- findOverlaps(original_oe, oe_reduced)
-    new_oe <- oe_reduced[subjectHits(oe_overlaps)]
+    new_oe <- oe_reduced[S4Vectors::subjectHits(oe_overlaps)]
     oe(x) <- new_oe
   }
 

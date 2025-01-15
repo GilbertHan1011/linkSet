@@ -248,7 +248,7 @@ setReplaceMethod("regions", "linkSet", function(x, value) {
   unchecked_anchor1(x) <- out$anchor1
   unchecked_anchor2(x) <- out$anchor2
   unchecked_regions(x) <- out$regions
-  validObject(x)
+  methods::validObject(x)
   return(x)
 })
 
@@ -342,6 +342,6 @@ setMethod("names", "linkSet", function(x) {
 setReplaceMethod("names", "linkSet", function(x, value) {
     if (!is.null(value) && !is.character(value)) { value <- as.character(value) }                
     x@NAMES <- value
-    validObject(x)
+    methods::validObject(x)
     return(x)
 })

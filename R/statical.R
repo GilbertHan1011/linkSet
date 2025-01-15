@@ -111,8 +111,8 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 		bait.level = 'bait-level' == multiple.testing.correction
 		);
 	#print(dim(chicane.results))
-	# sort by q-value
-	chicane.results <- chicane.results[ order(q.value, p.value) ];
+	# sort by q-value and p-value
+	chicane.results <- chicane.results[order(chicane.results$q.value, chicane.results$p.value), ];
 	#print(dim(chicane.results))
 	# Convert results back to linkSet
 	result_linkSet <- linkSet
@@ -524,6 +524,7 @@ fit.model <- function(
 #' @importFrom iterators icount
 #' @importFrom stats logLik
 #' @importFrom rlang .data
+#' @importFrom data.table :=
 run.model.fitting <- function(
 	interaction.data,
 	distance.bins = NULL, 
@@ -568,14 +569,14 @@ run.model.fitting <- function(
 		trans.formula <- stats::as.formula(count ~ log(bait.trans.count + 1) )
 	}
 
-	# if requested, update model with user-requested terms
+	# if requested, update model with user-requested terms
 	if( !is.null(adjustment.terms) ) {
 		adjustment.string <- paste(adjustment.terms, collapse = ' + ');
 
 		cis.formula <- stats::update.formula(cis.formula, paste0('~ . + ', adjustment.string) );
 		trans.formula <- stats::update.formula(trans.formula, paste0('~ . + ', adjustment.string) );
 
-		# graceful error handling – make sure all variables are in the input data
+		# graceful error handling – make sure all variables are in the input data
 		# do this here in case user specifies something like log(x) in adjustment.terms
 		formula.vars <- unique( c(all.vars(cis.formula), all.vars(trans.formula)) );
 		if( !all(formula.vars %in% names(interaction.data)) ) {
@@ -586,10 +587,10 @@ run.model.fitting <- function(
 			stop(error.message);
 		}
 	}
-	trans.data <- interaction.data[ is.na(distance) ,];
+	trans.data <- interaction.data[ is.na(interaction.data$distance) ,];
 
 	# Fit models separately in each quantile of distance
-	cis.data <- interaction.data[ !is.na(distance) ,];
+	cis.data <- interaction.data[ !is.na(interaction.data$distance) ,];
 	cis.data <- cis.data[ order(cis.data$distance), ];
 
 	# free up memory
@@ -629,16 +630,16 @@ run.model.fitting <- function(
 		temp.data = distance.binned.data,
 		iter.i = icount(),
 		.packages = packages,
-    .export = ".model.try.catch"
+    .export = c(".model.try.catch", "create.modelfit.plot")
 		) %dopar% {
 		
-		# progress meter
+		# progress meter
 		if(verbose) cat('*');
 
-		# fit model through helper function that gracefully handles numerical errors
+		# fit model through helper function that gracefully handles numerical errors
 		model <- .model.try.catch(
 			cis.formula, 
-			temp.data,
+			get("temp.data"),
 			distribution = distribution,
 			maxit = maxit,
 			epsilon = epsilon,
@@ -647,8 +648,8 @@ run.model.fitting <- function(
 			start = start
 			);
     #browser()
-		temp.data[, expected := model$expected.values ];
-		temp.data[, p.value := model$p.values ];
+		data.table::set(get("temp.data"), j = "expected", value = model$expected.values)
+		data.table::set(get("temp.data"), j = "p.value", value = model$p.values)
 
 		# clear memory
 		#for (gc.i in 1:5) { gc(); }
@@ -662,7 +663,7 @@ run.model.fitting <- function(
 			print(logLik(model$model));
 			sink(NULL)
 			if (distribution %in% c('negative-binomial', 'poisson')) {
-				create.modelfit.plot(
+				utils::create.modelfit.plot(
 					model$model, 
 					file.name = file.path(interim.data.dir, paste0('model_fit_distance_adjusted_nonb2b_', iter.i, '.png'))
 					);
@@ -674,7 +675,7 @@ run.model.fitting <- function(
 
 		# clear memory
 		#for (gc.i in 1:5) { gc(); }
-		return(temp.data);
+		return(get("temp.data"));
 	}
 
 	# fit trans-interactions
@@ -695,8 +696,8 @@ run.model.fitting <- function(
 			init.theta = init.theta,
 			start = start
 			);
-		trans.data[, expected := trans.model$expected.values ];
-		trans.data[, p.value := trans.model$p.values ];
+		data.table::set(trans.data, j = "expected", value = trans.model$expected.values)
+		data.table::set(trans.data, j = "p.value", value = trans.model$p.values)
 
 		# add to p-value data frame
 		p.value.data[[ length(p.value.data) + 1 ]] <- trans.data; 
@@ -1074,7 +1075,6 @@ multiple.testing.correct <- function(
 	}
 }
 
-
 #' fit.glm
 #'
 #' @description
@@ -1213,7 +1213,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = gamlss.tr::POtr(), 
+				family = getFromNamespace("POtr", "gamlss.tr")(), 
 				control = gamlss.control
 				);
 
@@ -1226,7 +1226,7 @@ fit.glm <- function(
 					# Solution: set to 1 if observed count is lowest it can be
 					p.value <- ifelse(
 						observed >= 2,
-						pPOtr(observed - 1, mu = mu, lower.tail = FALSE),
+						getFromNamespace("pPOtr", "gamlss.tr")(observed - 1, mu = mu, lower.tail = FALSE),
 						1
 						);
 
@@ -1244,7 +1244,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = gamlss.tr::NBItr(), 
+				family = getFromNamespace("NBItr", "gamlss.tr")(), 
 				control = gamlss.control
 				);
 
@@ -1256,7 +1256,7 @@ fit.glm <- function(
 					# Solution: set to 1 if observed count is lowest it can be
 					p.value <- ifelse(
 						observed >= 2,
-						gamlss.tr::pNBItr(
+						getFromNamespace("pNBItr", "gamlss.tr")(
 							observed - 1, 
 							mu = mu, 
 							sigma = sigma,
