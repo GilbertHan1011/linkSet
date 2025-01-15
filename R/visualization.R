@@ -488,7 +488,7 @@ setMethod("plot_genomic_ranges", "linkSet", function(linkset, showBait = NULL,
     # Create the base plot
     p <- ggplot2::ggplot(data = data) +
         geom_range(
-            ggplot2::aes(xstart = xstart, xend = xend, region = region),
+            ggplot2::aes(xstart = .data$xstart, xend = .data$xend, region = .data$region),
             minimal_width = minimal_width,
             bait_col = bait_col,
             oe_col = oe_col,
@@ -670,7 +670,7 @@ plotBaits <- function(linkset, scoreCol = "score", countCol = "count", n = 4, ba
       expandGr <- GRanges(
         seqnames = seqnames(baitGr),
         ranges = IRanges(start = new_start, end = new_end),
-        strand = strand(baitGr)
+        strand = GenomicRanges::strand(baitGr)
       )
       this <- subsetOE(this, expandGr)
     }

@@ -31,8 +31,7 @@
   epsilon = 1e-08,
   cores = 1,
   trace = FALSE,
-  verbose = FALSE,
-  interim.data.dir = NULL
+  verbose = FALSE
 )
 
 .verify.linkSet(linkSet)
@@ -90,8 +89,6 @@ Changing this filtering setting may affect multiple testing correction by alteri
 \item{trace}{Logical indicating if output should be produced for each of model fitting procedure. Passed to \code{glm.control} or \code{gamlss.control}}
 
 \item{verbose}{Logical indicating whether to print progress reports.}
-
-\item{interim.data.dir}{Path to directory to store intermediate QC data and plots. NULL indicate skip intermediate results.}
 
 \item{e}{Error object}
 

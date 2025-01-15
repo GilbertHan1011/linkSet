@@ -2,7 +2,7 @@
 % Please edit documentation in R/formatConverter.R
 \name{as.GInteractions,linkSet-method}
 \alias{as.GInteractions,linkSet-method}
-\title{export linkset to GInteractions}
+\title{Convert to GInteractions}
 \usage{
 \S4method{as.GInteractions}{linkSet}(x)
 }
@@ -13,7 +13,7 @@
 A GInteractions object
 }
 \description{
-export linkset to GInteractions
+Convert linkSet object to GInteractions
 }
 \examples{
 data(linkExample)

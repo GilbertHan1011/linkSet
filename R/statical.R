@@ -21,8 +21,6 @@
 #'	String specifying how multiple testing correction should be performed, by bait or globally.
 #' @param verbose
 #' 	Logical indicating whether to print progress reports.
-#' @param interim.data.dir
-#'  Path to directory to store intermediate QC data and plots. NULL indicate skip intermediate results.
 #' 
 #' @return A linkSet object with additional columns:
 #' 	\item{expected}{The expected number of reads linking the two fragments under the fitted model}
@@ -69,8 +67,7 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 	epsilon = 1e-8,
 	cores = 1,
 	trace = FALSE,
-	verbose = FALSE,
-	interim.data.dir = NULL
+	verbose = FALSE
 	) {
 	# TO DO:
 	#	- check format of linkSet object if passed directly
@@ -102,8 +99,7 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 		cores = cores,
 		maxit = maxit,
 		epsilon = epsilon,
-		trace = trace,
-		interim.data.dir = interim.data.dir
+		trace = trace
 		);
 
 	chicane.results <- multiple.testing.correct(
@@ -420,8 +416,6 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 #'	Logical indicating whether to print progress reports. 	
 #' @param cores
 #'	Integer value specifying how many cores to use to fit model for cis-interactions.
-#' @param interim.data.dir
-#'  Path to directory to store intermediate QC data and plots.
 #'
 #' @return Interactions data with expected number of interactions and p-values added.
 #' @keywords internal
@@ -442,8 +436,7 @@ fit.model <- function(
 	epsilon = 1e-8,
 	cores = 1,
 	trace = FALSE,
-	verbose = FALSE,
-	interim.data.dir = NULL
+	verbose = FALSE
 	) {
 	### MAIN ##################################################################
   print("fitting model....")
@@ -475,8 +468,7 @@ fit.model <- function(
 			cores = cores,
 			maxit = maxit,
 			epsilon = epsilon,
-			trace = trace,
-			interim.data.dir = interim.data.dir
+			trace = trace
 			);
 	}
 
@@ -491,8 +483,7 @@ fit.model <- function(
 			cores = cores,
 			maxit = maxit, 
 			epsilon = epsilon,
-			trace = trace,
-			interim.data.dir = interim.data.dir
+			trace = trace
 			);
 	}
 
@@ -535,8 +526,7 @@ run.model.fitting <- function(
 	epsilon = 1e-8,
 	cores = 1,
 	trace = FALSE,
-	verbose = FALSE,
-	interim.data.dir = NULL
+	verbose = FALSE
 	) {
 
 	# TO DO:
@@ -650,29 +640,6 @@ run.model.fitting <- function(
     #browser()
 		data.table::set(get("temp.data"), j = "expected", value = model$expected.values)
 		data.table::set(get("temp.data"), j = "p.value", value = model$p.values)
-
-		# clear memory
-		#for (gc.i in 1:5) { gc(); }
-
-		# plot model's fit
-		if (!is.null(interim.data.dir) && !is.null(model$model) && bait.to.bait == FALSE) {
-
-			# store model fits to a file:
-			sink(file = file.path(interim.data.dir, paste0('model_fit_distance_adjusted_nonb2b_', iter.i, '.txt')), type = c('output', 'message'));
-			print(summary(model$model));
-			print(logLik(model$model));
-			sink(NULL)
-			if (distribution %in% c('negative-binomial', 'poisson')) {
-				utils::create.modelfit.plot(
-					model$model, 
-					file.name = file.path(interim.data.dir, paste0('model_fit_distance_adjusted_nonb2b_', iter.i, '.png'))
-					);
-				}
-			else {
-				if (verbose) cat('\nskipping model fit rootogram as countreg::rootogram does not support: ', distribution);
-				}
-			}
-
 		# clear memory
 		#for (gc.i in 1:5) { gc(); }
 		return(get("temp.data"));
@@ -1104,7 +1071,7 @@ multiple.testing.correct <- function(
 #'  \item{model}{model object}
 #' 	\item{expected.values}{vector of expected values for each element in original data}
 #' 	\item{p.values}{vector of p-values for test of significantly higher response than expected}
-#' 
+#' @importFrom utils getFromNamespace
 fit.glm <- function(
 	formula, 
 	data, 
@@ -1213,7 +1180,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = getFromNamespace("POtr", "gamlss.tr")(), 
+				family = utils::getFromNamespace("POtr", "gamlss.tr")(), 
 				control = gamlss.control
 				);
 
@@ -1226,7 +1193,7 @@ fit.glm <- function(
 					# Solution: set to 1 if observed count is lowest it can be
 					p.value <- ifelse(
 						observed >= 2,
-						getFromNamespace("pPOtr", "gamlss.tr")(observed - 1, mu = mu, lower.tail = FALSE),
+						utils::getFromNamespace("pPOtr", "gamlss.tr")(observed - 1, mu = mu, lower.tail = FALSE),
 						1
 						);
 
@@ -1244,7 +1211,7 @@ fit.glm <- function(
 			model <- gamlss::gamlss(
 				formula,
 				data = temp.data,
-				family = getFromNamespace("NBItr", "gamlss.tr")(), 
+				family = utils::getFromNamespace("NBItr", "gamlss.tr")(), 
 				control = gamlss.control
 				);
 
@@ -1256,7 +1223,7 @@ fit.glm <- function(
 					# Solution: set to 1 if observed count is lowest it can be
 					p.value <- ifelse(
 						observed >= 2,
-						getFromNamespace("pNBItr", "gamlss.tr")(
+						utils::getFromNamespace("pNBItr", "gamlss.tr")(
 							observed - 1, 
 							mu = mu, 
 							sigma = sigma,

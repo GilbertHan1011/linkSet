@@ -17,7 +17,7 @@ Convert(x, ...)
 
 \S4method{Convert}{Pairs}(x, baitCol = NULL, ...)
 
-\S4method{Convert}{ANY}(x, ...)
+\S4method{Convert}{ANY}(x, baitCol = NULL, ...)
 
 readvalidPairs(file, njobs = 1, format = "validPairs")
 }

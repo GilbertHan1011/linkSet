@@ -730,8 +730,9 @@ setMethod("as.data.frame", "linkSet", function(x) {
 
 #######################################################
 # export
-#' export linkset to GInteractions
+#' Convert linkSet object to GInteractions
 #' 
+#' @title Convert to GInteractions
 #' @param x A linkset object
 #' @return A GInteractions object
 #' @export
@@ -747,6 +748,8 @@ setMethod("as.GInteractions", "linkSet", function(x) {
   mcols(gi) = metadata
   return(gi)
 })
+
+
 #' Export linkSet to interBed format
 #' 
 #' @param x A linkSet object

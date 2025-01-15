@@ -188,13 +188,13 @@ setMethod("crossGeneEnhancer", "linkSet", function(x, score_threshold = NULL) {
 
   # Use data.table to handle large data efficiently
   baitDf <- data.table::as.data.table(list(oeName = oeName, baitName = baitName))
-  baitDf <- data.table::setDT(baitDf)[, list(N = .N), by = list(oeName, baitName)]
-  baitDf <- baitDf[N > 0]
+  baitDf <- data.table::setDT(baitDf)[, list(.N), by = list(oeName, baitName)]
+  baitDf <- baitDf[get("N") > 0]
 
-  enhancerDf <- data.table::setDT(baitDf)[, list(N = .N), by = list(oeName)]
+  enhancerDf <- data.table::setDT(baitDf)[, list(.N), by = list(oeName)]
 
   # Assign the Freq column to the mcol of x
-  mcols(x)$crossFreq <- enhancerDf$N[match(oeName, enhancerDf$oeName)]
+  mcols(x)$crossFreq <- enhancerDf[["N"]][match(oeName, enhancerDf[["oeName"]])]
 
   return(x)
 })
