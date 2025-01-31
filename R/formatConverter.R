@@ -3,7 +3,6 @@
 #' @description Convert other data formats to linkSet. Currently supported: GInteractions, data.frame.
 #' 
 #' @param x A GInteractions object
-#' @param specificCol A character string specifying the column to use for bait naming
 #' @param ... Additional arguments (not used)
 #' 
 #' @rdname Convert
@@ -246,25 +245,19 @@ setMethod("Convert", signature(x = "ANY"), function(x, baitCol = NULL, ...) {
 
 
 ###############################################################
-#' Convert GInteractions with bait range and oe ranges to linkSet
-#' 
-#' 
-#'
-#' @param x A GInteractions object
-#' @param geneGr A GRanges object representing genes
-#' @param peakGr A GRanges object representing peaks
+#' @rdname baitGInteractions
 #' @param geneSymbol A character vector with same length as geneGr or column name in mcols(geneGr) for gene symbols
-#'
-#' @return A linkSet object
-#' @export
 #' @examples
 #' # Example usage:
 #' library(GenomicRanges)
 #' library(InteractionSet)
 #' 
 #' # Create example GRanges objects for genes and peaks
-#' geneGr <- GRanges(seqnames = "chr1", ranges = IRanges(start = c(100, 200), end = c(150, 250)), geneSymbol = c("Gene1", "Gene2"))
-#' peakGr <- GRanges(seqnames = "chr1", ranges = IRanges(start = c(300, 400), end = c(350, 450)))
+#' geneGr <- GRanges(seqnames = "chr1", 
+#'                   ranges = IRanges(start = c(100, 200), end = c(150, 250)), 
+#'                   geneSymbol = c("Gene1", "Gene2"))
+#' peakGr <- GRanges(seqnames = "chr1", 
+#'                   ranges = IRanges(start = c(300, 400), end = c(350, 450)))
 #' 
 #' # Create example GInteractions object
 #' gi <- GInteractions(anchor1 = geneGr, anchor2 = peakGr)
@@ -274,6 +267,7 @@ setMethod("Convert", signature(x = "ANY"), function(x, baitCol = NULL, ...) {
 #' 
 #' # Print the linkSet object
 #' print(linkSetObj)
+#' @export
 setMethod("baitGInteractions", signature(x = "GInteractions", geneGr = "GRanges", peakGr = "GRanges"), function(x, geneGr, peakGr, geneSymbol=NULL) {
   gi <- x
   # validate geneSymbol in in mcols(geneGr)
@@ -729,17 +723,8 @@ setMethod("as.data.frame", "linkSet", function(x) {
 
 
 #######################################################
-# export
-#' Convert linkSet object to GInteractions
-#' 
-#' @title Convert to GInteractions
-#' @param x A linkset object
-#' @return A GInteractions object
+#' @rdname as.GInteractions
 #' @export
-#' @examples
-#' data(linkExample)
-#' gi <- as.GInteractions(linkExample)
-#' gi
 setMethod("as.GInteractions", "linkSet", function(x) {
   anchor.one = regionsBait(x)
   anchor.two = oe(x)
@@ -750,16 +735,9 @@ setMethod("as.GInteractions", "linkSet", function(x) {
 })
 
 
-#' Export linkSet to interBed format
-#' 
-#' @param x A linkSet object
-#' @param outfile Output file name
+#' @rdname exportInterBed
+#' @importFrom utils write.table
 #' @export
-#' @examples
-#' data(linkExample)
-#' tmpfile <- tempfile(fileext = ".txt")
-#' exportInterBed(linkExample, tmpfile)
-#' cat(readLines(tmpfile), sep = "\n")
 setMethod("exportInterBed", "linkSet", function(x, outfile) {
   gr1 <- as.data.frame(regionsBait(x))
   colnames(gr1) <- paste0("bait_",colnames(gr1))
@@ -777,16 +755,9 @@ setMethod("exportInterBed", "linkSet", function(x, outfile) {
   utils::write.table(out, outfile, sep="\t", quote=FALSE, row.names=FALSE)
 })
 
-#' Export linkSet to WashU format
-#' 
-#' @param x A linkSet object
-#' @param outfile Output file name
+#' @rdname exportWashU
+#' @importFrom utils write.table
 #' @export
-#' @examples
-#' data(linkExample)
-#' tmpfile <- tempfile(fileext = ".txt")
-#' exportWashU(linkExample, tmpfile)
-#' cat(readLines(tmpfile), sep = "\n")
 setMethod("exportWashU", "linkSet", function(x, outfile) {
   gr1 <- as.data.frame(regionsBait(x))
   colnames(gr1) <- paste0("bait_",colnames(gr1))

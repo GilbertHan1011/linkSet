@@ -1,39 +1,23 @@
-#' run_chicane
-#'
-#' @description
-#'	This function adapts the \code{chicane} function from the \code{ChICANE} package to work with the \code{linkSet} object format.
-#' Run full method for detecting significant interactions in capture Hi-C experiments, starting 
-#'  either from a linkSet object or preprocessed data from \code{prepare.data}
-
-#' @param linkSet 
-#'	A linkSet object containing interaction data. Can be used instead of interactions specification if the linkSet object has already been prepared.
-#' @param replicate.merging.method
-#' 	Method that should be used for merging replicates, if applicable
-#' @param bait.filters 
-#'	Vector of length two, where the first element corresponds to the lower-end filter and the second to the upper-end filter.
-#' 	When global multiple testing correction is performed, altering the bait filtering settings may affect the number of significant results.
-#' @param target.filters
-#' 	Vector of length two, giving lower and higher filter, respectively. 
-#'	Changing this filtering setting may affect multiple testing correction by altering the number of tests performed.
-#' @param distance.bins
-#' 	Number of bins to split distance into. Models are fit separately in each bin.
-#' @param multiple.testing.correction
-#'	String specifying how multiple testing correction should be performed, by bait or globally.
-#' @param verbose
-#' 	Logical indicating whether to print progress reports.
+#' @rdname run_chicane
+#' @param replicate.merging.method Method for merging replicates (default: 'sum')
+#' @param distribution Distribution to use for modeling (default: 'negative-binomial')
+#' @param include.zeros How to handle zero counts (default: 'none')
+#' @param bait.filters Vector of length 2 for bait filtering thresholds (default: c(0,1))
+#' @param target.filters Vector of length 2 for target filtering thresholds (default: c(0,1))
+#' @param distance.bins Number of distance bins (default: NULL)
+#' @param multiple.testing.correction Method for multiple testing correction (default: 'bait-level')
+#' @param adjustment.terms Additional terms for model adjustment (default: NULL)
+#' @param remove.adjacent Whether to remove adjacent fragments (default: FALSE)
+#' @param temp.directory Directory for temporary files (default: NULL)
+#' @param keep.files Whether to keep temporary files (default: FALSE)
+#' @param maxit Maximum iterations for model fitting (default: 100)
+#' @param epsilon Convergence threshold (default: 1e-8)
+#' @param cores Number of CPU cores to use (default: 1)
+#' @param trace Whether to print trace information (default: FALSE)
+#' @param verbose Whether to print progress information (default: FALSE)
 #' 
-#' @return A linkSet object with additional columns:
-#' 	\item{expected}{The expected number of reads linking the two fragments under the fitted model}
-#'	\item{p.value}{P-value for test of the observed number of reads significantly exceeding the expected count}
-#'	\item{q.value}{FDR-corrected p-value}
-#'
-#' 
-#' @import data.table
-#' @rdname chicane
-#' @export
-#'
 #' @examples
-#' # Example usage of run_chicane function
+#' # Create example data
 #' gr1 <- GRanges(seqnames = c("chr1", "chr3", "chr3"),
 #'                ranges = IRanges(start = c(1000, 2000, 3000), width = 100),
 #'                strand = "+", symbol = c("BRCA1", "TP53", "NONEXISTENT"))
@@ -41,16 +25,27 @@
 #'                ranges = IRanges(start = c(5000, 6000, 7000), width = 100),
 #'                strand = "+")
 #' ls <- linkSet(gr1, gr2, specificCol = "symbol")
-#' annotated_ls <- suppressWarnings(annotatePromoter(ls, genome = "hg38", upstream = 500,overwrite = TRUE))
+#' 
+#' # Annotate and prepare data
+#' annotated_ls <- suppressWarnings(
+#'   annotatePromoter(ls, genome = "hg38", upstream = 500, overwrite = TRUE)
+#' )
 #' annotated_ls <- countInteractibility(annotated_ls)
 #' annotated_ls <- linkSet::pairdist(annotated_ls)
-#' # Run run_chicane function
-#' result_ls <- run_chicane(annotated_ls, replicate.merging.method = 'sum', 
-#'                          bait.filters = c(0, 1), target.filters = c(0, 1), 
-#'                          distance.bins = NULL, multiple.testing.correction = 'bait-level', 
-#'                          verbose = TRUE)
-#' result_ls	
 #' 
+#' # Run analysis
+#' result_ls <- run_chicane(
+#'   annotated_ls, 
+#'   replicate.merging.method = 'sum',
+#'   bait.filters = c(0, 1),
+#'   target.filters = c(0, 1),
+#'   distance.bins = NULL,
+#'   multiple.testing.correction = 'bait-level',
+#'   verbose = TRUE
+#' )
+#' 
+#' @import data.table
+#' @export
 setMethod("run_chicane", "linkSet", function(linkSet, 
 	replicate.merging.method = 'sum',
 	distribution = 'negative-binomial',
@@ -403,30 +398,24 @@ setMethod("run_chicane", "linkSet", function(linkSet,
 }
 
 
-#' fit.model
-#'
-#' @description
-#'  Fit negative binomial model to obtain p-values for interactions.
-#'
-#' @param interaction.data 
-#'	data.table object containing interaction counts. Must contain columns distance, count, and bait_trans_count.
-#' @param adjustment.terms 
-#' 	Character vector of extra terms to adjust for in the model fit.
-#' @param verbose
-#'	Logical indicating whether to print progress reports. 	
-#' @param cores
-#'	Integer value specifying how many cores to use to fit model for cis-interactions.
-#'
-#' @return Interactions data with expected number of interactions and p-values added.
+#' Fit Statistical Model for Interaction Analysis
+#' 
+#' @title Fit Model for Interaction Analysis
+#' @description Fit negative binomial model to obtain p-values for interactions.
+#' 
+#' @param linkSet A linkSet object
+#' @param distance.bins Distance bins for model fitting (default: NULL)
+#' @param distribution Type of distribution to use (default: 'negative-binomial')
+#' @param adjustment.terms Character vector of extra terms to adjust for in the model fit
+#' @param maxit Maximum number of iterations (default: 100)
+#' @param epsilon Convergence threshold (default: 1e-8)
+#' @param cores Number of cores to use (default: 1)
+#' @param trace Whether to print trace information (default: FALSE)
+#' @param verbose Whether to print progress reports (default: FALSE)
+#' 
+#' @return A data.table with fitted model results including expected counts and p-values
 #' @keywords internal
 #' @noRd
-#' @rdname chicane
-#' @details
-#' 	Fit a negative binomial model for obtaining p-value for interactions. The data is first sorted by distance, and models
-#' 	are fit separately in each quantile of the distance-sorted data.
-#'
-#'
-#' @export
 fit.model <- function(
 	linkSet, 
 	distance.bins = NULL,

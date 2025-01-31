@@ -26,6 +26,34 @@ plotBaits(
 \arguments{
 \item{linkset}{A linkSet object}
 
+\item{scoreCol}{Column name containing scores for coloring points}
+
+\item{countCol}{Column name containing counts for y-axis values}
+
+\item{n}{Number of random baits to plot if baits parameter is NULL}
+
+\item{baits}{Vector of specific baits to plot. If NULL, n random baits are selected}
+
+\item{plotBaitNames}{Logical indicating whether to show bait names in plot titles}
+
+\item{plevel1}{Upper threshold for score coloring (red)}
+
+\item{plevel2}{Lower threshold for score coloring (blue)}
+
+\item{outfile}{Output file path. If NULL, plot is displayed rather than saved}
+
+\item{width}{Width of output plot in inches}
+
+\item{height}{Height of output plot in inches}
+
+\item{extend.base}{Base pairs to extend view range on either side of bait}
+
+\item{bgCol}{Color for points below plevel2 threshold}
+
+\item{lev2Col}{Color for points between plevel2 and plevel1 thresholds}
+
+\item{lev1Col}{Color for points above plevel1 threshold}
+
 \item{...}{Additional plotting parameters}
 }
 \value{

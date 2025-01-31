@@ -1,21 +1,5 @@
-#' Count Bait and Other End Interactions
-#'
-#' This function takes a linkSet object and counts the number of interactions for each bait and other end.
-#'
-#' @param x A linkSet object
-#' @param baitRegions Whether to count bait regions
-#'
-#' @return A linkSet object with counts for each unique interaction
-#'
+#' @rdname countInteractions
 #' @export
-#'
-#' @examples
-#' data(linkExample)
-#' linkSet = c(linkExample,linkExample)
-#' linkSet = countInteractions(linkSet)
-#' linkSet
-#' @aliases countBaitOe
-#'
 setMethod("countInteractions", "linkSet", function(x, baitRegions = TRUE) {
   # Get the regions and bait names
   reg <- regions(x)
@@ -47,18 +31,8 @@ setMethod("countInteractions", "linkSet", function(x, baitRegions = TRUE) {
 })
 
 
-#' Count bait and oe
-#' @param x A linkSet object
-#' @param baitRegions Whether to count bait regions
-#' @description This function calculate the number of trans interactions for each bait and oe. The word "interactibility" can refer to https://doi.org/10.1038%2Fnature11279.
-#' @return A linkSet object with counts for each unique interaction
-#' @examples
-#' data(linkExample)
-#' linkSet = c(linkExample,linkExample)
-#' linkSet = countInteractions(linkSet)
-#' linkSet = countInteractibility(linkSet)
+#' @rdname countInteractibility
 #' @export
-#'
 setMethod("countInteractibility", "linkSet", function(x, baitRegions = TRUE) {
   # Ensure inter_type and count are present
   if (!"inter_type" %in% colnames(mcols(x))) {

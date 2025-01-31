@@ -74,7 +74,7 @@ knitr::include_graphics("img/linkSetImport.png")
 ### Construction from GRanges objects
 
 To construct a `linkSet` object from GRanges objects:
-```{r}
+```{r, eval = FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 ```

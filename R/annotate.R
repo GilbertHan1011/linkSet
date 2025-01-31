@@ -131,21 +131,12 @@ reg.finalizer(.dbCache, function(e) {
   .cleanupConnections()
 }, onexit = TRUE)
 
-#' Execute Database Operation with Automatic Connection Management
-#'
-#' @param x The genome name or object to operate on
-#' @param expr Expression to evaluate with database connection
-#' @param ... Additional arguments
-#' @return Result of the database operation
+#' @rdname withTxDb
+#' @param x Character string specifying the genome ("hg38", "hg19", or "mm10")
+#' @param expr Function to execute with database connection
+#' @param ... Additional arguments passed to expr
+#' @importFrom methods setMethod
 #' @export
-#' @examples
-#' requireNamespace("TxDb.Hsapiens.UCSC.hg38.knownGene")
-#' requireNamespace("org.Hs.eg.db")
-#' result <- withTxDb("hg38", function(src) {
-#'   genes <- Organism.dplyr::genes(src)
-#'   return(genes)
-#' })
-#' print(result)
 setMethod("withTxDb", signature(x = "character", expr = "function"),
   function(x, expr, ...) {
     if (!x %in% c("mm10", "hg38", "hg19")) {

@@ -1,21 +1,4 @@
-#' Add Genome Links to Coverage Plot.
-#'
-#' @param linkSet A linkSet object
-#' @param score.col Column index that contains score information, used when \code{file.type} is bedpe. Default: NULL.
-#' @param score.threshold The score threshold, used when \code{score.col} is not NULL. Default: NULL.
-#' @param score.color The score color vector. Default: c("grey70", "#56B1F7", "#132B43").
-#' @param scale.range Scale the height of links according to width, should be greater than or equal to 1 (not scale). Default: 10.
-#' @param plot.space Top and bottom margin. Default: 0.1.
-#' @param plot.height The relative height of link to coverage plot. Default: 0.2.
-#' @param show.rect Logical value, whether to add rect border to the plot. Default: FALSE.
-#' @param extend.base Extend the base pair range to show more information. Default: 1000000.
-#' @param x.range The range of x-axis to show. Default: NULL.
-#' @param log.scale Logical value, whether to log1p the score. Default: TRUE.
-#' @param arrow.size The size of the arrow head. Default: 0.02.
-#' @param remove_x_axis Logical value, whether to remove the x-axis. Default: FALSE.
-#' @param link_plot_on_top Logical value, whether to plot the link plot on top of the coverage plot. Default: FALSE.
-#'
-#' @return Plot.
+#' @rdname geom_linkset
 #' @importFrom GenomicRanges GRanges makeGRangesFromDataFrame start end
 #' @importFrom IRanges IRanges subsetByOverlaps
 #' @importFrom utils read.table
@@ -25,7 +8,6 @@
 #'   element_text margin scale_y_continuous scale_x_continuous expansion
 #'   coord_cartesian geom_curve
 #' @importFrom patchwork wrap_plots
-#' @references \url{https://stuartlab.org/signac/articles/cicero.html}
 #' @export
 #'
 #'
@@ -428,6 +410,7 @@ GeomRange <- ggplot2::ggproto("GeomRange", ggplot2::GeomTile,
 #' @examples
 #' data(linkExample)
 #' plot_genomic_ranges(linkExample, extend.base = 10)
+#' @importFrom rlang .data
 #' @export
 #' 
 setMethod("plot_genomic_ranges", "linkSet", function(linkset, showBait = NULL,
@@ -635,6 +618,20 @@ theme_range <- function(x.range, show.rect) {
 #' @importFrom GenomicRanges strand
 #' @name plotBaits
 #' @param linkset A linkSet object
+#' @param scoreCol Column name containing scores for coloring points
+#' @param countCol Column name containing counts for y-axis values
+#' @param n Number of random baits to plot if baits parameter is NULL
+#' @param baits Vector of specific baits to plot. If NULL, n random baits are selected
+#' @param plotBaitNames Logical indicating whether to show bait names in plot titles
+#' @param plevel1 Upper threshold for score coloring (red)
+#' @param plevel2 Lower threshold for score coloring (blue)
+#' @param outfile Output file path. If NULL, plot is displayed rather than saved
+#' @param width Width of output plot in inches
+#' @param height Height of output plot in inches
+#' @param extend.base Base pairs to extend view range on either side of bait
+#' @param bgCol Color for points below plevel2 threshold
+#' @param lev2Col Color for points between plevel2 and plevel1 thresholds
+#' @param lev1Col Color for points above plevel1 threshold
 #' @param ... Additional plotting parameters
 #' @return A ggplot object
 #' @export

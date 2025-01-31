@@ -55,6 +55,9 @@ setMethod("parallelVectorNames", "linkSet", function(x) {
 #' Display detailed information about a linkSet object
 #' @export
 #' @rdname show
+#' @importFrom methods show
+#' @param object A linkSet object to display
+#' @docType methods
 #' @examples
 #' # Example usage of show method for linkSet object
 #' gr1 <- GRanges(seqnames = c("chr1", "chr2", "chr3"),
@@ -69,25 +72,12 @@ setMethod("show", "linkSet", function(object) {
   showLinkSet(object, margin="  ", print.seqinfo=TRUE, print.classinfo=TRUE, baitRegion=FALSE)
 })
 
+#' @rdname showLinkSet
+#' @importFrom methods show
 #' @export
-#' @rdname show
-#' @param object A linkSet object to be displayed.
-#' @param margin A character string to be used as the margin for the display.
-#' @param print.seqinfo A logical indicating whether to print sequence information.
-#' @param print.classinfo A logical indicating whether to print class information.
-#' @param baitRegion A logical indicating whether to display bait regions.
-#' @examples
-#' # Example usage of showLinkSet method for linkSet object
-#' gr1 <- GRanges(seqnames = c("chr1", "chr2", "chr3"),
-#'                ranges = IRanges(start = c(1000, 2000, 3000), width = 100),
-#'                strand = "+", symbol = c("BRCA1", "TP53", "NONEXISTENT"))
-#' gr2 <- GRanges(seqnames = c("chr1", "chr2", "chr3"),
-#'                ranges = IRanges(start = c(5000, 6000, 7000), width = 100),
-#'                strand = "+")
-#' ls <- linkSet(gr1, gr2, specificCol = "symbol")
-#' showLinkSet(ls)
-setMethod("showLinkSet", "linkSet",function(x, margin="", print.seqinfo=FALSE, 
+setMethod("showLinkSet", "linkSet",function(object, margin="", print.seqinfo=FALSE, 
                                           print.classinfo=FALSE, baitRegion=FALSE) {
+  x <- object
   lx <- length(x)
   nr <- length(regions(x))
   nc <- .safeNMcols(x)
@@ -353,15 +343,8 @@ setMethod("linkSet", c("GRanges", "GRanges","character_Or_missing"),
           }
 )
 
-#' Clean Unused Regions in a linkSet Object
-#' 
-#' This function removes unused regions from a linkSet object, ensuring that all regions are referenced by either anchor1 or anchor2.
-#' 
-#' @param x A linkSet object from which to remove unused regions.
+#' @rdname clean_unused_regions
 #' @export
-#' @examples
-#' data(linkExample)
-#' linkExample <- clean_unused_regions(linkExample)
 setMethod("clean_unused_regions", "linkSet", function(x) {
     used_regions <- sort(unique(c(anchor1(x), anchor2(x))))
     new_regions <- regions(x)[used_regions]

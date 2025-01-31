@@ -142,12 +142,17 @@ setMethod("diagnoseLinkSet", "linkSet", function(x){
   p1 <- ggplot2::ggplot(df, ggplot2::aes(x = distance)) +
     ggplot2::geom_histogram() +
     ggplot2::labs(title = "Distance Distribution", x = "log10 Distance(bp)", y = "Count")+ggplot2::theme_bw()
-  df2 <- data.frame(inter_type = inter_type)
-  # Ensure we have both 'inter' and 'intra' types
-  df2$inter_type <- factor(df2$inter_type, levels = c("inter", "intra"))
   
-  p2 <- ggplot2::ggplot(df2, ggplot2::aes(x = inter_type, y = ..prop.., group = 1)) +
-    ggplot2::geom_bar(fill = "steelblue") +
+  # Calculate proportions manually
+  type_counts <- table(inter_type)
+  type_props <- prop.table(type_counts)
+  df2 <- data.frame(
+    inter_type = factor(names(type_props), levels = c("inter", "intra")),
+    proportion = as.numeric(type_props)
+  )
+  
+  p2 <- ggplot2::ggplot(df2, ggplot2::aes(x = inter_type, y = .data$proportion)) +
+    ggplot2::geom_bar(stat = "identity", fill = "steelblue") +
     ggplot2::labs(title = "Inter/Intra Interaction", x = "Interaction Type", y = "Percentage") +
     ggplot2::scale_x_discrete(drop = FALSE) +  # This ensures both levels are shown
     ggplot2::scale_y_continuous(labels = scales::percent_format()) +

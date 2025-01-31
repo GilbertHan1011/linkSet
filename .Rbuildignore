@@ -6,3 +6,7 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^doc$
+^Meta$
+^vignettes/cache/.*
+^vignettes/figure/.*

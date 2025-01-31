@@ -1,9 +1,7 @@
 #' @keywords internal
 "_PACKAGE"
-
 #' @name linkSet
 #'
-#' @aliases linkSet
 #'
 #' @title linkSet: Base Classes for Storing Genomic Link Data
 #'
@@ -50,8 +48,7 @@
 #' }
 #'
 #' @examples
-#' # Basic usage example
-#' library(linkSet)
-#' # Add a simple example here
+#' data(linkExample)
+#' linkExample
 #'
 NULL

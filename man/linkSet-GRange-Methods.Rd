@@ -29,7 +29,7 @@
 \alias{reduce}
 \title{linkSet-GRange-Methods}
 \usage{
-\S4method{trim}{linkSet}(x, use.names = TRUE)
+\S4method{trim}{linkSet}(x, use.names = TRUE, ...)
 
 \S4method{resize}{linkSet}(x, width, fix = "start", use.names = TRUE, ...)
 
@@ -94,6 +94,29 @@
 \item{x}{A linkSet object}
 
 \item{use.names}{A logical indicating whether to use names}
+
+\item{...}{Additional arguments passed to the GenomicRanges trim method}
+
+\item{width}{The desired width of the output ranges}
+
+\item{fix}{The anchor point for resizing operations ("start", "end", or "center")}
+
+\item{region}{Which regions to modify ("both", "bait", or "oe")}
+
+\item{start, end}{The desired start and end coordinates for narrowing}
+
+\item{shift}{The number of positions to shift}
+
+\item{both}{Whether to get flanking regions on both sides}
+
+\item{ignore.strand}{
+    \code{TRUE} or \code{FALSE}. Whether the strand of the input ranges
+    should be ignored or not. See details below.
+  }
+
+\item{upstream, downstream}{Number of bases upstream/downstream for promoter regions}
+
+\item{drop.empty.ranges}{Whether to drop empty ranges when reducing}
 }
 \value{
 A linkSet object

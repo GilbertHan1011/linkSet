@@ -253,15 +253,10 @@ setReplaceMethod("regions", "linkSet", function(x, value) {
 })
 
 
-
 #' @rdname linkSet-accessors
-#' @aliases regionsBait
-#' @description
-#' This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
-#' 
-#' @param x A linkSet object.
-#' @param value A GRanges object containing the new regions corresponding to the bait anchors.
-#' @return The modified linkSet object with the new regions corresponding to the bait anchors.
+#' @aliases regionsBait<-,linkSet-method
+#' @importFrom methods is
+#' @export
 setReplaceMethod("regionsBait", "linkSet", function(x, value) {
   if (!is(value, "GRanges")) {
     stop("The 'value' must be a GRanges object")
@@ -282,13 +277,9 @@ setReplaceMethod("regionsBait", "linkSet", function(x, value) {
 })
 
 #' @rdname linkSet-accessors
-#' @aliases oe
-#' @description
-#' This method replaces the other end (oe) anchors of a linkSet object with new values.
-#' 
-#' @param x A linkSet object.
-#' @param value A GRanges object containing the new other end anchors.
-#' @return The modified linkSet object with the new other end anchors.
+#' @aliases oe<-,linkSet-method
+#' @importFrom methods is
+#' @export
 setReplaceMethod("oe", "linkSet", function(x, value) {
   if (!is(value, "GRanges")) {
     stop("The 'value' must be a GRanges object")
@@ -335,10 +326,25 @@ setReplaceMethod("$", "linkSet", function(x, name, value) {
 ###############################################################
 # Name getting and setting.
 
+#' @rdname linkSet-accessors
+#' @aliases names
+#' @description
+#' This method returns the names of a linkSet object.
+#' @param x A linkSet object
+#' @return A character vector of names
+#' @export
 setMethod("names", "linkSet", function(x) { 
     x@NAMES 
 })
 
+#' @rdname linkSet-accessors
+#' @aliases names<-
+#' @description
+#' This method replaces the names of a linkSet object.
+#' @param x A linkSet object
+#' @param value A character vector of new names
+#' @return The modified linkSet object with updated names
+#' @export
 setReplaceMethod("names", "linkSet", function(x, value) {
     if (!is.null(value) && !is.character(value)) { value <- as.character(value) }                
     x@NAMES <- value

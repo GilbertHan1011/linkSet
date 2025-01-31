@@ -26,9 +26,8 @@ and intra-chromosomal interactions.
 }
 }
 \examples{
-# Basic usage example
-library(linkSet)
-# Add a simple example here
+data(linkExample)
+linkExample
 
 }
 \references{

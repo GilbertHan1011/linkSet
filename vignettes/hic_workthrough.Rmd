@@ -28,7 +28,7 @@ We highly recommend you to use custom data instead of the example data provided 
 
 ## Setup
 
-```{r}
+```{r, eval = FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 ```

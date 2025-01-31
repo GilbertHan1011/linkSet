@@ -41,6 +41,10 @@
 \alias{$,linkSet-method}
 \alias{$}
 \alias{$<-,linkSet-method}
+\alias{names,linkSet-method}
+\alias{names}
+\alias{names<-,linkSet-method}
+\alias{names<-}
 \title{linkSet-accessors}
 \usage{
 bait(x) <- value
@@ -94,11 +98,15 @@ unchecked_regions(x) <- value
 \S4method{$}{linkSet}(x, name)
 
 \S4method{$}{linkSet}(x, name) <- value
+
+\S4method{names}{linkSet}(x)
+
+\S4method{names}{linkSet}(x) <- value
 }
 \arguments{
-\item{x}{A linkSet object.}
+\item{x}{A linkSet object}
 
-\item{value}{The new value to assign to the specified metadata column.}
+\item{value}{A character vector of new names}
 
 \item{type}{The type of anchor to return. Can be "both", "bait", or "oe".}
 
@@ -138,13 +146,13 @@ The modified linkSet object with the new anchor2 values.
 
 The modified linkSet object with the new regions.
 
-The modified linkSet object with the new regions corresponding to the bait anchors.
-
-The modified linkSet object with the new other end anchors.
-
 The value of the specified metadata column.
 
 The modified linkSet object with the new metadata column value.
+
+A character vector of names
+
+The modified linkSet object with updated names
 }
 \description{
 Methods to get and set fields in an linkSet object.
@@ -175,13 +183,13 @@ This method replaces the anchor2 of a linkSet object with new values.
 
 This method replaces the regions of a linkSet object with new values.
 
-This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
-
-This method replaces the other end (oe) anchors of a linkSet object with new values.
-
 This method returns the metadata column of a linkSet object.
 
 This method replaces the metadata column of a linkSet object with new values.
+
+This method returns the names of a linkSet object.
+
+This method replaces the names of a linkSet object.
 }
 \examples{
 data(linkExample)
