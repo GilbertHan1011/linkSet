@@ -13,10 +13,10 @@ This method replaces the regions of a linkSet object with new values.
 This method replaces the anchor1 of a linkSet object with new values.
 This method replaces the anchor2 of a linkSet object with new values.
 This method replaces the regions of a linkSet object with new values.
-This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
-This method replaces the other end (oe) anchors of a linkSet object with new values.
 This method returns the metadata column of a linkSet object.
-This method replaces the metadata column of a linkSet object with new values."><meta property="og:description" content="Methods to get and set fields in an linkSet object.
+This method replaces the metadata column of a linkSet object with new values.
+This method returns the names of a linkSet object.
+This method replaces the names of a linkSet object."><meta property="og:description" content="Methods to get and set fields in an linkSet object.
 This method returns the anchor IDs of a linkSet object.
 This method returns the anchors of a linkSet object.
 This method returns the bait anchors of a linkSet object.
@@ -30,10 +30,10 @@ This method replaces the regions of a linkSet object with new values.
 This method replaces the anchor1 of a linkSet object with new values.
 This method replaces the anchor2 of a linkSet object with new values.
 This method replaces the regions of a linkSet object with new values.
-This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.
-This method replaces the other end (oe) anchors of a linkSet object with new values.
 This method returns the metadata column of a linkSet object.
-This method replaces the metadata column of a linkSet object with new values."><meta property="og:image" content="https://gilberthan1011.github.io/linkSet/logo.png"></head><body>
+This method replaces the metadata column of a linkSet object with new values.
+This method returns the names of a linkSet object.
+This method replaces the names of a linkSet object."><meta property="og:image" content="https://gilberthan1011.github.io/linkSet/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -85,10 +85,10 @@ This method replaces the metadata column of a linkSet object with new values."><
 <p>This method replaces the anchor1 of a linkSet object with new values.</p>
 <p>This method replaces the anchor2 of a linkSet object with new values.</p>
 <p>This method replaces the regions of a linkSet object with new values.</p>
-<p>This method replaces the regions corresponding to the bait anchors of a linkSet object with new values.</p>
-<p>This method replaces the other end (oe) anchors of a linkSet object with new values.</p>
 <p>This method returns the metadata column of a linkSet object.</p>
 <p>This method replaces the metadata column of a linkSet object with new values.</p>
+<p>This method returns the names of a linkSet object.</p>
+<p>This method replaces the names of a linkSet object.</p>
     </div>
 
     <div class="section level2">
@@ -164,7 +164,13 @@ This method replaces the metadata column of a linkSet object with new values."><
 <span><span class="va">x</span><span class="op">$</span><span class="va">name</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'linkSet'</span></span>
-<span><span class="va">x</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
+<span><span class="va">x</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span></span>
+<span><span class="co"># S4 method for class 'linkSet'</span></span>
+<span><span class="fu">names</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for class 'linkSet'</span></span>
+<span><span class="fu">names</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -172,11 +178,11 @@ This method replaces the metadata column of a linkSet object with new values."><
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A linkSet object.</p></dd>
+<dd><p>A linkSet object</p></dd>
 
 
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
-<dd><p>The new value to assign to the specified metadata column.</p></dd>
+<dd><p>A character vector of new names</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
@@ -209,10 +215,10 @@ while for the setters, the slots of x are modified accordingly – see Details.<
 <p>The modified linkSet object with the new anchor1 values.</p>
 <p>The modified linkSet object with the new anchor2 values.</p>
 <p>The modified linkSet object with the new regions.</p>
-<p>The modified linkSet object with the new regions corresponding to the bait anchors.</p>
-<p>The modified linkSet object with the new other end anchors.</p>
 <p>The value of the specified metadata column.</p>
 <p>The modified linkSet object with the new metadata column value.</p>
+<p>A character vector of names</p>
+<p>The modified linkSet object with updated names</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

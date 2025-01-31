@@ -43,7 +43,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for class 'linkSet'</span></span>
-<span><span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, use.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, use.names <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'linkSet'</span></span>
 <span><span class="fu">resize</span><span class="op">(</span><span class="va">x</span>, <span class="va">width</span>, fix <span class="op">=</span> <span class="st">"start"</span>, use.names <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -127,6 +127,47 @@
 
 <dt id="arg-use-names">use.names<a class="anchor" aria-label="anchor" href="#arg-use-names"></a></dt>
 <dd><p>A logical indicating whether to use names</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to the GenomicRanges trim method</p></dd>
+
+
+<dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
+<dd><p>The desired width of the output ranges</p></dd>
+
+
+<dt id="arg-fix">fix<a class="anchor" aria-label="anchor" href="#arg-fix"></a></dt>
+<dd><p>The anchor point for resizing operations ("start", "end", or "center")</p></dd>
+
+
+<dt id="arg-region">region<a class="anchor" aria-label="anchor" href="#arg-region"></a></dt>
+<dd><p>Which regions to modify ("both", "bait", or "oe")</p></dd>
+
+
+<dt id="arg-start-end">start, end<a class="anchor" aria-label="anchor" href="#arg-start-end"></a></dt>
+<dd><p>The desired start and end coordinates for narrowing</p></dd>
+
+
+<dt id="arg-shift">shift<a class="anchor" aria-label="anchor" href="#arg-shift"></a></dt>
+<dd><p>The number of positions to shift</p></dd>
+
+
+<dt id="arg-both">both<a class="anchor" aria-label="anchor" href="#arg-both"></a></dt>
+<dd><p>Whether to get flanking regions on both sides</p></dd>
+
+
+<dt id="arg-ignore-strand">ignore.strand<a class="anchor" aria-label="anchor" href="#arg-ignore-strand"></a></dt>
+<dd><p><code>TRUE</code> or <code>FALSE</code>. Whether the strand of the input ranges
+    should be ignored or not. See details below.</p></dd>
+
+
+<dt id="arg-upstream-downstream">upstream, downstream<a class="anchor" aria-label="anchor" href="#arg-upstream-downstream"></a></dt>
+<dd><p>Number of bases upstream/downstream for promoter regions</p></dd>
+
+
+<dt id="arg-drop-empty-ranges">drop.empty.ranges<a class="anchor" aria-label="anchor" href="#arg-drop-empty-ranges"></a></dt>
+<dd><p>Whether to drop empty ranges when reducing</p></dd>
 
 </dl></div>
     <div class="section level2">

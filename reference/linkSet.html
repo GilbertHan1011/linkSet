@@ -77,9 +77,19 @@ and intra-chromosomal interactions.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Basic usage example</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GilbertHan1011/linkSet" class="external-link">linkSet</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Add a simple example here</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">linkExample</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">linkExample</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linkSet object with 5 interactions and 1 metadata column:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              bait     seqnames_oe ranges_oe | anchor1.symbol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;character&gt;           &lt;Rle&gt; &lt;IRanges&gt; |    &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]       Gene1 ---        chr1     50-59 |          Gene1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]       Gene1 ---        chr2   150-159 |          Gene1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]       Gene2 ---        chr2   250-259 |          Gene2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]       Gene3 ---        chr4   350-359 |          Gene3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]       Gene3 ---        chr4   450-459 |          Gene3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   regions: 10 ranges and 0 metadata columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 4 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

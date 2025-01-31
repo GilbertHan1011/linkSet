@@ -47,10 +47,10 @@
 
       <dl><dt>
 
-          <code><a href="Convert.html">Convert()</a></code> <code><a href="Convert.html">readvalidPairs()</a></code>
+          <code><a href="Convert.html">Convert(<i>&lt;GInteractions&gt;</i>)</a></code> <code><a href="Convert.html">Convert(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="Convert.html">Convert(<i>&lt;Pairs&gt;</i>)</a></code> <code><a href="Convert.html">Convert(<i>&lt;ANY&gt;</i>)</a></code> <code><a href="Convert.html">readvalidPairs()</a></code>
 
         </dt>
-        <dd>Convert different object types to linkSet</dd>
+        <dd>Convert GInteractions to linkSet</dd>
       </dl><dl><dt>
 
           <code><a href="annotateInter-linkSet-method.html">annotateInter(<i>&lt;linkSet&gt;</i>)</a></code>
@@ -65,7 +65,7 @@
         <dd>Annotate the link set with txDb. Give a gene list, and return a</dd>
       </dl><dl><dt>
 
-          <code><a href="as.GInteractions-linkSet-method.html">as.GInteractions(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="as.GInteractions.html">as.GInteractions()</a></code>
 
         </dt>
         <dd>Convert to GInteractions</dd>
@@ -77,10 +77,10 @@
         <dd>coerce linkSet to DataFrame</dd>
       </dl><dl><dt>
 
-          <code><a href="baitGInteractions-GInteractions-GRanges-GRanges-method.html">baitGInteractions(<i>&lt;GInteractions&gt;</i>,<i>&lt;GRanges&gt;</i>,<i>&lt;GRanges&gt;</i>)</a></code>
+          <code><a href="baitGInteractions.html">baitGInteractions()</a></code>
 
         </dt>
-        <dd>Convert GInteractions with bait range and oe ranges to linkSet</dd>
+        <dd>Convert GInteractions to linkSet with bait annotations</dd>
       </dl><dl><dt>
 
           <code><a href="character_Or_missing-class.html">character_Or_missing-class</a></code>
@@ -89,19 +89,19 @@
         <dd>Character or Missing Class Union</dd>
       </dl><dl><dt>
 
-          <code><a href="clean_unused_regions-linkSet-method.html">clean_unused_regions(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="clean_unused_regions.html">clean_unused_regions()</a></code>
 
         </dt>
         <dd>Clean Unused Regions in a linkSet Object</dd>
       </dl><dl><dt>
 
-          <code><a href="countInteractibility-linkSet-method.html">countInteractibility(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="countInteractibility.html">countInteractibility()</a></code>
 
         </dt>
-        <dd>Count bait and oe</dd>
+        <dd>Count bait and oe interactibility</dd>
       </dl><dl><dt>
 
-          <code><a href="countInteractions-linkSet-method.html">countInteractions(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="countInteractions.html">countInteractions()</a></code>
 
         </dt>
         <dd>Count Bait and Other End Interactions</dd>
@@ -125,16 +125,16 @@
         <dd>check.split.data.numerical.fit</dd>
       </dl><dl><dt>
 
-          <code><a href="exportInterBed-linkSet-method.html">exportInterBed(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="exportInterBed.html">exportInterBed()</a></code>
 
         </dt>
         <dd>Export linkSet to interBed format</dd>
       </dl><dl><dt>
 
-          <code><a href="exportWashU-linkSet-method.html">exportWashU(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="exportWashU.html">exportWashU()</a></code>
 
         </dt>
-        <dd>Export linkSet to WashU format</dd>
+        <dd>Export linkSet to WashU browser format</dd>
       </dl><dl><dt>
 
           <code><a href="filterLinks-linkSet-method.html">filterLinks(<i>&lt;linkSet&gt;</i>)</a></code>
@@ -143,10 +143,10 @@
         <dd>Filter links for further analysis</dd>
       </dl><dl><dt>
 
-          <code><a href="geom_linkset-linkSet-method.html">geom_linkset(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="geom_linkset.html">geom_linkset()</a></code>
 
         </dt>
-        <dd>Add Genome Links to Coverage Plot.</dd>
+        <dd>Add Genome Links to Coverage Plot</dd>
       </dl><dl><dt>
 
           <code><a href="geom_range.html">geom_range()</a></code>
@@ -173,7 +173,7 @@
         <dd>Create a linkSet object from input data</dd>
       </dl><dl><dt>
 
-          <code><a href="linkSet-accessors.html">`bait&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor1&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor2&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`unchecked_regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">anchor1(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchor2(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">seqinfo(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchorIds(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchors(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">first(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">second(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">bait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">oe(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regionsBait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor1&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor2&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`regionsBait&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`oe&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="linkSet-accessors.html">`bait&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor1&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`anchor2&lt;-`()</a></code> <code><a href="linkSet-accessors.html">`unchecked_regions&lt;-`()</a></code> <code><a href="linkSet-accessors.html">anchor1(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchor2(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regions(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">seqinfo(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchorIds(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">anchors(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">first(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">second(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">bait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">oe(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">regionsBait(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor1&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`unchecked_anchor2&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`regionsBait&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`oe&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`$&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">names(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="linkSet-accessors.html">`names&lt;-`(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>linkSet-accessors</dd>
@@ -209,6 +209,12 @@
         <dd>linkSet: Base Classes for Storing Genomic Link Data</dd>
       </dl><dl><dt>
 
+          <code><a href="oe-set.html">`oe&lt;-`()</a></code>
+
+        </dt>
+        <dd>Set Other End (OE) Anchors</dd>
+      </dl><dl><dt>
+
           <code><a href="orderLinks-linkSet-method.html">orderLinks(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
@@ -233,22 +239,40 @@
         <dd>plot genomic ranges and links</dd>
       </dl><dl><dt>
 
-          <code><a href="reduceRegions-linkSet-method.html">reduceRegions(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="reduceRegions.html">reduceRegions()</a></code>
 
         </dt>
-        <dd>Reduce a linkSet object</dd>
+        <dd>Reduce Regions in a linkSet Object</dd>
       </dl><dl><dt>
 
-          <code><a href="show.html">show(<i>&lt;linkSet&gt;</i>)</a></code> <code><a href="show.html">showLinkSet(<i>&lt;linkSet&gt;</i>)</a></code>
+          <code><a href="regionsBait-set.html">`regionsBait&lt;-`()</a></code>
+
+        </dt>
+        <dd>Set Bait Regions</dd>
+      </dl><dl><dt>
+
+          <code><a href="run_chicane.html">run_chicane()</a></code>
+
+        </dt>
+        <dd>Run ChICANE Analysis</dd>
+      </dl><dl><dt>
+
+          <code><a href="show.html">show(<i>&lt;linkSet&gt;</i>)</a></code>
 
         </dt>
         <dd>Display detailed information about a linkSet object</dd>
       </dl><dl><dt>
 
-          <code><a href="withTxDb-character-function-method.html">withTxDb(<i>&lt;character&gt;</i>,<i>&lt;function&gt;</i>)</a></code>
+          <code><a href="showLinkSet.html">showLinkSet()</a></code>
 
         </dt>
-        <dd>Execute Database Operation with Automatic Connection Management</dd>
+        <dd>Show linkSet Object Details</dd>
+      </dl><dl><dt>
+
+          <code><a href="withTxDb.html">withTxDb()</a></code>
+
+        </dt>
+        <dd>Database Operation with Connection Management</dd>
       </dl></div>
   </main></div>
 
